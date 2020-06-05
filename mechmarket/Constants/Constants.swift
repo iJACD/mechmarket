@@ -22,4 +22,8 @@ public struct MM {
         static let HelveticaBold = "Helvetica-Bold"
         static let HelveticaLight = "Helvetica-Light"
     }
+    
+    struct Links {
+        static let mechmarket = "https://www.reddit.com/r/mechmarket"
+    }
 }

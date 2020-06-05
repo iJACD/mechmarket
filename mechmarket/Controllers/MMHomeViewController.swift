@@ -9,9 +9,6 @@
 import UIKit
 
 class MMHomeViewController: UIViewController {
-    private var isDarkMode: Bool {
-        return traitCollection.userInterfaceStyle == .dark
-    }
     private let size: CGFloat = 175
     private let spacing: CGFloat = 36
     private let countryTableDataSource = CountryTableDataSource()
@@ -75,11 +72,6 @@ class MMHomeViewController: UIViewController {
         return tbl
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        // TODO: Set colors function to set the colors of attributes that aren't
-        // natively supported by dark mode.
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -106,7 +98,9 @@ class MMHomeViewController: UIViewController {
     }
 
     @objc func didTouchMKButton() {
-        
+        if let link = URL(string: MM.Links.mechmarket) {
+            UIApplication.shared.open(link)
+        }
     }
 }
 
