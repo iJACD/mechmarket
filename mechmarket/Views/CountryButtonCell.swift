@@ -29,20 +29,20 @@ final class CountryButtonCell: UITableViewCell {
         backgroundColor = .systemGray6
         
         textLabel?.textAlignment = .center
-        textLabel?.font = UIFont(name: MK.FontNamed.HelveticaBold, size: 28)
-        textLabel?.textColor = .label
+        textLabel?.font = UIFont(name: MM.FontNamed.HelveticaBold, size: 24)
+        textLabel?.textColor = .secondaryLabel
       
-        layer.cornerRadius = 5
+        layer.cornerRadius = 10
         layer.masksToBounds = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         if selected {
             backgroundColor = .systemGreen
-            textLabel?.textColor = .white
+            textLabel?.textColor = .systemBackground
         } else {
             backgroundColor = .systemGray6
-            textLabel?.textColor = .label
+            textLabel?.textColor = .secondaryLabel
         }
     }
 }

@@ -8,9 +8,9 @@
 
 import UIKit
 
-public struct MK {
+public struct MM {
     struct OriginPage {
-        static let imageOverlayText = "r/mk"
+        static let imageOverlayText = "r/mm"
         static let selectOriginText = "Select search origin: "
     }
     

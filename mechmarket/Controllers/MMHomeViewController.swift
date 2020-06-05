@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MMHomeViewController.swift
 //  mechmarket
 //
 //  Created by JohnAnthony on 6/4/20.
@@ -8,27 +8,26 @@
 
 import UIKit
 
-class MKHomeViewController: UIViewController {
+class MMHomeViewController: UIViewController {
     private var isDarkMode: Bool {
         return traitCollection.userInterfaceStyle == .dark
     }
-    
     private let size: CGFloat = 175
     private let spacing: CGFloat = 36
     private let countryTableDataSource = CountryTableDataSource()
     private lazy var roundImageView: UIButton = {
         let btn = UIButton()
-        let img = MK.Images.keyBoardImage
+        let img = MM.Images.keyBoardImage
         let btnLbl = UILabel()
         
         let strokeTextAttributes = [
             NSAttributedString.Key.strokeColor :  UIColor.systemBackground,
             NSAttributedString.Key.foregroundColor :  UIColor.secondaryLabel,//UIColor.white,
             NSAttributedString.Key.strokeWidth : -1.5,
-            NSAttributedString.Key.font : UIFont(name: MK.FontNamed.HelveticaBold, size: 36)!
+            NSAttributedString.Key.font : UIFont(name: MM.FontNamed.HelveticaBold, size: 36)!
         ] as [NSAttributedString.Key : Any]
         
-        btnLbl.attributedText = NSMutableAttributedString(string: MK.OriginPage.imageOverlayText,
+        btnLbl.attributedText = NSMutableAttributedString(string: MM.OriginPage.imageOverlayText,
                                                           attributes: strokeTextAttributes)
         btnLbl.translatesAutoresizingMaskIntoConstraints = false
         
@@ -46,28 +45,32 @@ class MKHomeViewController: UIViewController {
                 btnLbl.centerYAnchor.constraint(equalTo: parent.centerYAnchor)
             ])
         }
-
+        
+        btn.addTarget(self, action: #selector(didTouchMKButton), for: .touchUpInside)
+        
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
     
     private lazy  var promptLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = MK.OriginPage.selectOriginText
+        lbl.text = MM.OriginPage.selectOriginText
         lbl.textColor = .secondaryLabel
         lbl.lineBreakMode = .byWordWrapping
         lbl.numberOfLines = 2
-        lbl.font = UIFont(name: MK.FontNamed.HelveticaLight, size: 36)
+        lbl.font = UIFont(name: MM.FontNamed.HelveticaLight, size: 36)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
     private lazy var countryTableView: UITableView = {
-        let tbl = UITableView()
+        let tbl = UITableView(frame: .zero, style: .plain)
         tbl.delegate = self
         tbl.register(CountryButtonCell.self, forCellReuseIdentifier: CountryButtonCell.countryButtonCellId)
         tbl.dataSource = countryTableDataSource
         tbl.isScrollEnabled = false
+        tbl.separatorStyle = .none
+        tbl.backgroundColor = .clear
         tbl.translatesAutoresizingMaskIntoConstraints = false
         return tbl
     }()
@@ -86,7 +89,7 @@ class MKHomeViewController: UIViewController {
         NSLayoutConstraint.activate([
             roundImageView.widthAnchor.constraint(equalToConstant: size),
             roundImageView.heightAnchor.constraint(equalToConstant: size),
-            roundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            roundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: spacing*2),
             roundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             promptLabel.topAnchor.constraint(equalTo: roundImageView.bottomAnchor, constant: spacing),
@@ -98,15 +101,18 @@ class MKHomeViewController: UIViewController {
             countryTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -spacing*1.5),
             countryTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
+        let firstIndex = IndexPath(row: 0, section: 0)
+        countryTableView.selectRow(at: firstIndex, animated: true, scrollPosition: .none)
     }
 
-
+    @objc func didTouchMKButton() {
+        
+    }
 }
 
-extension MKHomeViewController: UITableViewDelegate {
+extension MMHomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        section == 0 ? 0 : spacing
+        section == 0 ? 0 : spacing/2
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
