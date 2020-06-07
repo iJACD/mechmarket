@@ -11,7 +11,7 @@ import UIKit
 class MMHomeViewController: UIViewController {
     private let size: CGFloat = 175
     private let spacing: CGFloat = 36
-    private let countryTableDataSource = CountryTableDataSource()
+    private let countryTableDataSource = MMCountryTableDataSource()
     private lazy var roundImageView: UIButton = {
         let btn = UIButton()
         let img = MM.Images.keyBoardImage
@@ -63,8 +63,8 @@ class MMHomeViewController: UIViewController {
     private lazy var countryTableView: UITableView = {
         let tbl = UITableView(frame: .zero, style: .plain)
         tbl.delegate = self
-        tbl.register(CountryButtonCell.self, forCellReuseIdentifier: CountryButtonCell.countryButtonCellId)
         tbl.dataSource = countryTableDataSource
+        tbl.register(MMCountryButtonCell.self, forCellReuseIdentifier: MMCountryButtonCell.reuseIdentifier)
         tbl.isScrollEnabled = false
         tbl.separatorStyle = .none
         tbl.backgroundColor = .clear
@@ -117,5 +117,14 @@ extension MMHomeViewController: UITableViewDelegate {
         let clearView = UIView()
         clearView.backgroundColor = .clear
         return clearView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        modalTransitionStyle = .flipHorizontal
+//        modalPresentationStyle = .fullScreen
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let controller = MMClassifiedsSwipeController(collectionViewLayout: layout)
+        present(controller, animated: true)
     }
 }

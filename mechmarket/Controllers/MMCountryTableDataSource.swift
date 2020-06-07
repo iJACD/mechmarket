@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CountryTableDataSource: NSObject {
+final class MMCountryTableDataSource: NSObject {
     private var countries: [Country]
     
     override init() {
@@ -22,7 +22,7 @@ final class CountryTableDataSource: NSObject {
     }
 }
 
-extension CountryTableDataSource: UITableViewDataSource {
+extension MMCountryTableDataSource: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         countries.count
     }
@@ -34,7 +34,7 @@ extension CountryTableDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let country = countries[indexPath.section]
         
-        if let countryButton = tableView.dequeueReusableCell(withIdentifier: CountryButtonCell.countryButtonCellId) as? CountryButtonCell  {
+        if let countryButton = tableView.dequeueReusableCell(withIdentifier: MMCountryButtonCell.reuseIdentifier) as? MMCountryButtonCell  {
             countryButton.configure(with: country)
             return countryButton
         }

@@ -26,4 +26,10 @@ public struct MM {
     struct Links {
         static let mechmarket = "https://www.reddit.com/r/mechmarket"
     }
+    
+    struct ButtonTitles {
+        static let buying = "Buying"
+        static let sellOrTrade = "Selling/Trading"
+        static let sold = "Sold"
+    }
 }

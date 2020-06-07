@@ -8,8 +8,8 @@
 
 import UIKit
 
-final class CountryButtonCell: UITableViewCell {
-    static let countryButtonCellId = "countryButtonCellId"
+final class MMCountryButtonCell: UITableViewCell {
+    static let reuseIdentifier = "countryButtonCellId"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
