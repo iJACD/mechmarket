@@ -16,6 +16,7 @@ public struct MM {
     
     struct Images {
         static let keyBoardImage = UIImage(named: "keyboardImage")
+        static let optionsButton = UIImage(systemName: "ellipsis", withConfiguration: UIImage.SymbolConfiguration(weight: .black))
     }
     
     struct FontNamed {

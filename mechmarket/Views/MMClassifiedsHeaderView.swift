@@ -30,12 +30,17 @@ final class MMClassifiedsHeaderView: UIView {
         v.translatesAutoresizingMaskIntoConstraints = false
         v.addSubview(mmRoundImageButton)
         v.addSubview(mmTitleLabel)
+        v.addSubview(mmOptionsButton)
+        
         NSLayoutConstraint.activate([
             mmRoundImageButton.centerYAnchor.constraint(equalTo: v.centerYAnchor),
             mmRoundImageButton.leadingAnchor.constraint(equalTo: v.leadingAnchor, constant: 20),
             
             mmTitleLabel.centerYAnchor.constraint(equalTo: v.centerYAnchor),
-            mmTitleLabel.leadingAnchor.constraint(equalTo: mmRoundImageButton.trailingAnchor, constant: 10)
+            mmTitleLabel.leadingAnchor.constraint(equalTo: mmRoundImageButton.trailingAnchor, constant: 10),
+            
+            mmOptionsButton.centerYAnchor.constraint(equalTo: v.centerYAnchor),
+            mmOptionsButton.trailingAnchor.constraint(equalTo: v.trailingAnchor, constant: -30)
         ])
         return v
     }()
@@ -52,6 +57,14 @@ final class MMClassifiedsHeaderView: UIView {
         lbl.textColor = .label
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
+    }()
+    
+    private lazy var mmOptionsButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setImage(MM.Images.optionsButton, for: .normal)
+        btn.tintColor = .label
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
     }()
     
     private lazy var buyingButton: UIButton = MMCategoryButton.configure(color: .systemBlue, and: MM.ButtonTitles.buying)
