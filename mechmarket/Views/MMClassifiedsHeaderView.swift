@@ -49,7 +49,6 @@ final class MMClassifiedsHeaderView: UIView {
     private lazy var mmTitleLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont(name: MM.FontNamed.HelveticaBold, size: 24)
-        lbl.text = "United States"
         lbl.textColor = .label
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -84,6 +83,14 @@ final class MMClassifiedsHeaderView: UIView {
     @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    static func configure(with country: Country?) -> MMClassifiedsHeaderView {
+        let header = MMClassifiedsHeaderView()
+        if let country = country {
+            header.mmTitleLabel.text = country.name
+        }
+        return header
     }
     
     func setSellingAndTradingButton(target action: Selector, from target: MMClassifiedsSwipeController) {

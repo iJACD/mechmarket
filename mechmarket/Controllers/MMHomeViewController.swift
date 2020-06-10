@@ -83,9 +83,8 @@ extension MMHomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        modalTransitionStyle = .flipHorizontal
 //        modalPresentationStyle = .fullScreen
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let controller = MMClassifiedsSwipeController(collectionViewLayout: layout)
+        let selectedCountry = countryTableDataSource.getCountry(at: indexPath.section)
+        let controller = MMClassifiedsSwipeController.configure(with: selectedCountry)
         present(controller, animated: true)
     }
 }

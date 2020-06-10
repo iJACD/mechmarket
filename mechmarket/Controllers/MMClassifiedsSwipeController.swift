@@ -9,13 +9,24 @@
 import UIKit
 
 class MMClassifiedsSwipeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    private var selectedCountry: Country?
+    
     private lazy var headerView: MMClassifiedsHeaderView = {
-        let v = MMClassifiedsHeaderView(frame: .zero)
+        let v = MMClassifiedsHeaderView.configure(with: selectedCountry)
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
     
     private lazy var isInitialLoad: Bool = true
+    
+    static func configure(with country: Country) -> MMClassifiedsSwipeController {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        let v = MMClassifiedsSwipeController(collectionViewLayout: layout)
+        v.selectedCountry = country
+        return v
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -20,6 +20,10 @@ final class MMCountryTableDataSource: NSObject {
             Country(.eu, .eu)
         ]
     }
+    
+    func getCountry(at row: Int) -> Country {
+        countries[row]
+    }
 }
 
 extension MMCountryTableDataSource: UITableViewDataSource {
