@@ -17,7 +17,7 @@ final class MMClassifiedsHeaderView: UIView {
         ])
         
         stack.distribution = .fillProportionally
-        stack.spacing = 5
+        stack.spacing = 0
         stack.axis = .vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -25,7 +25,7 @@ final class MMClassifiedsHeaderView: UIView {
     
     private lazy var headerTitleContainer: UIView = {
         let v = UIView()
-        v.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        v.heightAnchor.constraint(equalToConstant: 85).isActive = true
         v.backgroundColor = .clear
         v.translatesAutoresizingMaskIntoConstraints = false
         v.addSubview(mmRoundImageButton)

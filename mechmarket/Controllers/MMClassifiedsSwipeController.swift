@@ -19,7 +19,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView.register(MMPageCellView.self, forCellWithReuseIdentifier: MMPageCellView.reuseIdentifier)
         collectionView.backgroundColor = .white
         collectionView.isPagingEnabled = true
         
@@ -32,7 +32,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
             headerView.topAnchor.constraint(equalTo: view.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: view.frame.height/6)
+            headerView.heightAnchor.constraint(equalToConstant: view.frame.height/7)
         ])
         
     }
@@ -69,8 +69,8 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = indexPath.item % 2 == 0 ? .systemBackground : .secondaryLabel
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMPageCellView.reuseIdentifier, for: indexPath)
+        cell.backgroundColor = .systemBackground 
         return cell
     }
     
