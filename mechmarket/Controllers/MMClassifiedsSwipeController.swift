@@ -15,10 +15,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         return v
     }()
     
-    private lazy var mmRoundIconButton: UIButton = {
-        let btn = UIButton()
-        return btn
-    }()
+    private lazy var isInitialLoad: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +24,9 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         collectionView.isPagingEnabled = true
         
         view.addSubview(headerView)
+        headerView.setSellingAndTradingButton(target: #selector(didTapSellTrade), from: self)
+        headerView.setBuyingButton(target: #selector(didTapBuying), from: self)
+        headerView.setSoldButton(target: #selector(didTapSold), from: self)
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -35,6 +35,29 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
             headerView.heightAnchor.constraint(equalToConstant: view.frame.height/6)
         ])
         
+    }
+    
+    @objc func didTapBuying() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+
+    @objc func didTapSellTrade() {
+         let indexPath = IndexPath(item: 1, section: 0)
+         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+
+    @objc func didTapSold() {
+         let indexPath = IndexPath(item: 2, section: 0)
+         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if isInitialLoad {
+            let indexPath = IndexPath(item: 1, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            isInitialLoad = false
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -47,7 +70,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .gray
+        cell.backgroundColor = indexPath.item % 2 == 0 ? .systemBackground : .secondaryLabel
         return cell
     }
     
@@ -55,3 +78,5 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         CGSize(width: view.frame.width, height: view.frame.height)
     }
 }
+
+

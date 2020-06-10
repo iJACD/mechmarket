@@ -12,39 +12,8 @@ class MMHomeViewController: UIViewController {
     private let size: CGFloat = 175
     private let spacing: CGFloat = 36
     private let countryTableDataSource = MMCountryTableDataSource()
-    private lazy var roundImageView: UIButton = {
-        let btn = UIButton()
-        let img = MM.Images.keyBoardImage
-        let btnLbl = UILabel()
-        
-        let strokeTextAttributes = [
-            NSAttributedString.Key.strokeColor :  UIColor.systemBackground,
-            NSAttributedString.Key.foregroundColor :  UIColor.secondaryLabel,//UIColor.white,
-            NSAttributedString.Key.strokeWidth : -1.5,
-            NSAttributedString.Key.font : UIFont(name: MM.FontNamed.HelveticaBold, size: 36)!
-        ] as [NSAttributedString.Key : Any]
-        
-        btnLbl.attributedText = NSMutableAttributedString(string: MM.OriginPage.imageOverlayText,
-                                                          attributes: strokeTextAttributes)
-        btnLbl.translatesAutoresizingMaskIntoConstraints = false
-        
-        btn.setImage(img, for: .normal)
-        btn.imageView?.contentMode = .scaleAspectFill
-        btn.imageView?.layer.borderWidth = 2
-        btn.imageView?.layer.borderColor = UIColor.secondaryLabel.cgColor
-        btn.imageView?.layer.cornerRadius = size/2
-        btn.imageView?.layer.masksToBounds = true
-        
-        btn.imageView?.addSubview(btnLbl)
-        if let parent = btn.imageView {
-            NSLayoutConstraint.activate([
-                btnLbl.centerXAnchor.constraint(equalTo: parent.centerXAnchor),
-                btnLbl.centerYAnchor.constraint(equalTo: parent.centerYAnchor)
-            ])
-        }
-        
-        btn.addTarget(self, action: #selector(didTouchMKButton), for: .touchUpInside)
-        
+    private lazy var mmRoundImageButton: MMRoundImageButton = {
+        let btn = MMRoundImageButton.configure(with: size, and: 36)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
@@ -75,16 +44,14 @@ class MMHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        view.addSubview(roundImageView)
+        view.addSubview(mmRoundImageButton)
         view.addSubview(promptLabel)
         view.addSubview(countryTableView)
         NSLayoutConstraint.activate([
-            roundImageView.widthAnchor.constraint(equalToConstant: size),
-            roundImageView.heightAnchor.constraint(equalToConstant: size),
-            roundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: spacing*2),
-            roundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            mmRoundImageButton.topAnchor.constraint(equalTo: view.topAnchor, constant: spacing*2),
+            mmRoundImageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            promptLabel.topAnchor.constraint(equalTo: roundImageView.bottomAnchor, constant: spacing),
+            promptLabel.topAnchor.constraint(equalTo: mmRoundImageButton.bottomAnchor, constant: spacing),
             promptLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: spacing),
             promptLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -spacing),
             
@@ -95,12 +62,6 @@ class MMHomeViewController: UIViewController {
         ])
         let firstIndex = IndexPath(row: 0, section: 0)
         countryTableView.selectRow(at: firstIndex, animated: true, scrollPosition: .none)
-    }
-
-    @objc func didTouchMKButton() {
-        if let link = URL(string: MM.Links.mechmarket) {
-            UIApplication.shared.open(link)
-        }
     }
 }
 

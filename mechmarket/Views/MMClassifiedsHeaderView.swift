@@ -9,6 +9,7 @@
 import UIKit
 
 final class MMClassifiedsHeaderView: UIView {
+    private let size: CGFloat = 60
     private lazy var outerVStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             headerTitleContainer,
@@ -25,16 +26,46 @@ final class MMClassifiedsHeaderView: UIView {
     private lazy var headerTitleContainer: UIView = {
         let v = UIView()
         v.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        v.backgroundColor = .blue
+        v.backgroundColor = .clear
         v.translatesAutoresizingMaskIntoConstraints = false
+        v.addSubview(mmRoundImageButton)
+        v.addSubview(mmTitleLabel)
+        NSLayoutConstraint.activate([
+            mmRoundImageButton.centerYAnchor.constraint(equalTo: v.centerYAnchor),
+            mmRoundImageButton.leadingAnchor.constraint(equalTo: v.leadingAnchor, constant: 20),
+            
+            mmTitleLabel.centerYAnchor.constraint(equalTo: v.centerYAnchor),
+            mmTitleLabel.leadingAnchor.constraint(equalTo: mmRoundImageButton.trailingAnchor, constant: 10)
+        ])
         return v
     }()
     
+    private lazy var mmRoundImageButton: MMRoundImageButton = {
+        let btn = MMRoundImageButton.configure(with: size, and: 18)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
+    
+    private lazy var mmTitleLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont(name: MM.FontNamed.HelveticaBold, size: 24)
+        lbl.text = "United States"
+        lbl.textColor = .label
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
+    private lazy var buyingButton: UIButton = MMCategoryButton.configure(color: .systemBlue, and: MM.ButtonTitles.buying)
+    
+    private lazy var sellingAndTradingButton: UIButton = MMCategoryButton.configure(color: .systemPurple, and: MM.ButtonTitles.sellOrTrade)
+    
+    private lazy var soldButton: UIButton = MMCategoryButton.configure(color: .systemRed, and: MM.ButtonTitles.sold)
+    
     private lazy var buttonHStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            MMCategoryButton.configure(with: #selector(didTapBuying), from: self, color: .systemYellow, and: MM.ButtonTitles.buying),
-            MMCategoryButton.configure(with: #selector(didTapSellTrade), from: self, color: .systemPurple, and: MM.ButtonTitles.sellOrTrade),
-            MMCategoryButton.configure(with: #selector(didTapSold), from: self, color: .systemRed, and: MM.ButtonTitles.sold)
+            buyingButton,
+            sellingAndTradingButton,
+            soldButton
         ])
         stack.spacing = 10
         stack.distribution = .fillEqually
@@ -55,16 +86,16 @@ final class MMClassifiedsHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func didTapBuying() {
-        print("Buying Tab")
+    func setSellingAndTradingButton(target action: Selector, from target: MMClassifiedsSwipeController) {
+        sellingAndTradingButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
-    @objc func didTapSellTrade() {
-        print("SellTrade Tab")
+    func setBuyingButton(target action: Selector, from vc: MMClassifiedsSwipeController) {
+        buyingButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
-    @objc func didTapSold() {
-        print("Sold Tab")
+    func setSoldButton(target action: Selector, from vc: MMClassifiedsSwipeController) {
+        soldButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
     private func setup() {
@@ -84,9 +115,8 @@ class MMCategoryButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func configure(with action: Selector, from target: MMClassifiedsHeaderView, color: UIColor, and text: String) -> MMCategoryButton {
+    static func configure(color: UIColor, and text: String) -> MMCategoryButton {
         let button = MMCategoryButton(frame: .zero)
-        button.addTarget(target, action: action, for: .touchUpInside)
         button.backgroundColor = color
         button.setTitle(text, for: .normal)
         return button

@@ -19,6 +19,7 @@
 		5D694059248B348B002D7466 /* MMClassifiedsSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D694058248B348B002D7466 /* MMClassifiedsSwipeController.swift */; };
 		5D69405B248C93C1002D7466 /* MMClassifiedsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405A248C93C1002D7466 /* MMClassifiedsHeaderView.swift */; };
 		5D69405D248C9D58002D7466 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405C248C9D58002D7466 /* UIView+Extensions.swift */; };
+		5D69405F248CB1F3002D7466 /* MMRoundImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		5D694058248B348B002D7466 /* MMClassifiedsSwipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMClassifiedsSwipeController.swift; sourceTree = "<group>"; };
 		5D69405A248C93C1002D7466 /* MMClassifiedsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMClassifiedsHeaderView.swift; sourceTree = "<group>"; };
 		5D69405C248C9D58002D7466 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRoundImageButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			children = (
 				5D456A8D248A9E7F009FAD34 /* MMCountryButtonCell.swift */,
 				5D69405A248C93C1002D7466 /* MMClassifiedsHeaderView.swift */,
+				5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				5D69405B248C93C1002D7466 /* MMClassifiedsHeaderView.swift in Sources */,
 				5D456A8C248A8FCD009FAD34 /* Country.swift in Sources */,
 				5D456A88248A7BC7009FAD34 /* Constants.swift in Sources */,
+				5D69405F248CB1F3002D7466 /* MMRoundImageButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
