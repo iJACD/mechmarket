@@ -19,7 +19,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     
     private lazy var isInitialLoad: Bool = true
     
-    static func configure(with country: Country) -> MMClassifiedsSwipeController {
+    static func configure(with country: Country, and listings: [MMListing]) -> MMClassifiedsSwipeController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
