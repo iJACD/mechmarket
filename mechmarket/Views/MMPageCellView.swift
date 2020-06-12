@@ -22,6 +22,8 @@ class MMPageCellView: UICollectionViewCell {
         return cv
     }()
     
+    private lazy var listings = [MMListing]()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -30,6 +32,11 @@ class MMPageCellView: UICollectionViewCell {
     @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func reload(with listings: [MMListing]) {
+        self.listings = listings
+        collectionView.reloadData()
     }
     
     private func setup() {
@@ -49,18 +56,29 @@ extension MMPageCellView: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         10
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let listing = listings[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath)
         cell.layer.cornerRadius = 25.0
         cell.layer.masksToBounds = true
-        cell.backgroundColor = .secondaryLabel
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.systemPurple.cgColor // TODO: Determin color based on tab
+        let imgView = UIImageView()
+        let imageUrlString = listing.imageUrlString
+   
+        imgView.loadImage(using: imageUrlString)
+        
+        imgView.contentMode = .scaleAspectFill
+        cell.backgroundView = imgView
         return cell
     }
     
@@ -73,6 +91,5 @@ extension MMPageCellView: UICollectionViewDataSource, UICollectionViewDelegateFl
         let width = (collectionView.bounds.width - totalSpacing)/numberOfItemsPerRow
         
         return CGSize(width: width, height: width)
-       
     }
 }

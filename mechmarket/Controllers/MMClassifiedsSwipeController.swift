@@ -10,7 +10,7 @@ import UIKit
 
 class MMClassifiedsSwipeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     private var selectedCountry: Country?
-    
+    private lazy var listings = [MMListing]()
     private lazy var headerView: MMClassifiedsHeaderView = {
         let v = MMClassifiedsHeaderView.configure(with: selectedCountry)
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -25,6 +25,8 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         
         let v = MMClassifiedsSwipeController(collectionViewLayout: layout)
         v.selectedCountry = country
+        v.listings = listings
+        
         return v
     }
     
@@ -80,9 +82,13 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMPageCellView.reuseIdentifier, for: indexPath)
-        cell.backgroundColor = .systemBackground 
-        return cell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMPageCellView.reuseIdentifier, for: indexPath) as? MMPageCellView {
+            cell.reload(with: listings)
+            cell.backgroundColor = .systemBackground
+            return cell
+        }
+        
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

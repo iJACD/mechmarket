@@ -21,6 +21,8 @@
 		5D69405D248C9D58002D7466 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405C248C9D58002D7466 /* UIView+Extensions.swift */; };
 		5D69405F248CB1F3002D7466 /* MMRoundImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */; };
 		5D69406124908819002D7466 /* MMPageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406024908819002D7466 /* MMPageCellView.swift */; };
+		5D6940632492FF62002D7466 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */; };
+		5D69406524933F23002D7466 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406424933F23002D7466 /* Secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		5D69405C248C9D58002D7466 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRoundImageButton.swift; sourceTree = "<group>"; };
 		5D69406024908819002D7466 /* MMPageCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMPageCellView.swift; sourceTree = "<group>"; };
+		5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		5D69406424933F23002D7466 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				5D69405C248C9D58002D7466 /* UIView+Extensions.swift */,
+				5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				5D456A87248A7BC7009FAD34 /* Constants.swift */,
+				5D69406424933F23002D7466 /* Secrets.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -201,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D6940632492FF62002D7466 /* UIImageView+Extensions.swift in Sources */,
 				5D456A6F24899E7C009FAD34 /* MMHomeViewController.swift in Sources */,
 				5D694059248B348B002D7466 /* MMClassifiedsSwipeController.swift in Sources */,
 				5D69405D248C9D58002D7466 /* UIView+Extensions.swift in Sources */,
@@ -209,6 +216,7 @@
 				5D69406124908819002D7466 /* MMPageCellView.swift in Sources */,
 				5D456A6D24899E7C009FAD34 /* SceneDelegate.swift in Sources */,
 				5D456A8E248A9E7F009FAD34 /* MMCountryButtonCell.swift in Sources */,
+				5D69406524933F23002D7466 /* Secrets.swift in Sources */,
 				5D69405B248C93C1002D7466 /* MMClassifiedsHeaderView.swift in Sources */,
 				5D456A8C248A8FCD009FAD34 /* Country.swift in Sources */,
 				5D456A88248A7BC7009FAD34 /* Constants.swift in Sources */,
