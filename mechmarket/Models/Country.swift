@@ -13,7 +13,7 @@ struct Country {
     var queryString: String
     
     
-    init(_ name: CountryName, _ queryString: QueryString) {
+    init(_ name: CountryName, _ queryString: CountryQueryString) {
         self.name = name.description
         self.queryString = queryString.description
     }
@@ -37,20 +37,21 @@ enum CountryName: CustomStringConvertible {
     }
 }
 
-enum QueryString: CustomStringConvertible {
+enum CountryQueryString: CustomStringConvertible {
     case all
     case us
     case ca
     case au
     case eu
     
+    // %22 translates to "
     var description: String {
         switch self {
         case .all: return ""
-        case .us: return "title:(\"[US-\")"
-        case .ca: return "title:(\"[CA-\")"
-        case .au: return "title:(\"[AU]\")"
-        case .eu: return "title:(\"[EU-\")"
+        case .us: return "title:(%22[US-%22)+AND+"
+        case .ca: return "title:(%22[CA-%22+NOT+%22[US-CA]%22)+AND+"
+        case .au: return "title:(%22[AU]%22)+AND+"
+        case .eu: return "title:(%22[EU-%22)+AND+"
         }
     }
 }

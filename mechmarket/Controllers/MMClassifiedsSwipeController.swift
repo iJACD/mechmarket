@@ -10,6 +10,8 @@ import UIKit
 
 class MMClassifiedsSwipeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     private var selectedCountry: Country?
+    private var selectedFlair: MMFlair?
+    
     private lazy var listings = [MMListing]()
     private lazy var headerView: MMClassifiedsHeaderView = {
         let v = MMClassifiedsHeaderView.configure(with: selectedCountry)
@@ -19,20 +21,20 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     
     private lazy var isInitialLoad: Bool = true
     
-    static func configure(with country: Country, and listings: [MMListing]) -> MMClassifiedsSwipeController {
+    static func configure(with country: Country) -> MMClassifiedsSwipeController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
         let v = MMClassifiedsSwipeController(collectionViewLayout: layout)
         v.selectedCountry = country
-        v.listings = listings
+        v.selectedFlair = .sellingOrTrading // First page to show.
         
         return v
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(MMPageCellView.self, forCellWithReuseIdentifier: MMPageCellView.reuseIdentifier)
+        collectionView.register(MMSellTradePage.self, forCellWithReuseIdentifier: MMSellTradePage.reuseIdentifier)
         collectionView.backgroundColor = .white
         collectionView.isPagingEnabled = true
         
@@ -52,17 +54,29 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     
     @objc func didTapBuying() {
         let indexPath = IndexPath(item: 0, section: 0)
+        if let cell = collectionView(collectionView, cellForItemAt: indexPath) as? MMSellTradePage {
+            selectedFlair = .buying
+            cell.reload(for: selectedCountry!, and: selectedFlair!)
+        }
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 
     @objc func didTapSellTrade() {
-         let indexPath = IndexPath(item: 1, section: 0)
-         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        let indexPath = IndexPath(item: 1, section: 0)
+        if let cell = collectionView(collectionView, cellForItemAt: indexPath) as? MMSellTradePage {
+            selectedFlair = .sellingOrTrading
+            cell.reload(for: selectedCountry!, and: selectedFlair!)
+        }
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 
     @objc func didTapSold() {
-         let indexPath = IndexPath(item: 2, section: 0)
-         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        let indexPath = IndexPath(item: 2, section: 0)
+        if let cell = collectionView(collectionView, cellForItemAt: indexPath) as? MMSellTradePage {
+            selectedFlair = .soldOrPurchased
+            cell.reload(for: selectedCountry!, and: selectedFlair!)
+        }
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -82,8 +96,12 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMPageCellView.reuseIdentifier, for: indexPath) as? MMPageCellView {
-            cell.reload(with: listings)
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMSellTradePage.reuseIdentifier, for: indexPath) as? MMSellTradePage {
+            if let selectedCountry = selectedCountry,
+                let selectedFlair = selectedFlair {
+                cell.reload(for: selectedCountry, and: selectedFlair)
+            }
+            
             cell.backgroundColor = .systemBackground
             return cell
         }

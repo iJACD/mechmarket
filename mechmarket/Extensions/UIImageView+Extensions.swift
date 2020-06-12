@@ -45,47 +45,26 @@ extension UIImageView {
             }.resume()
         }
     }
-}
-
-
-func getImgurDirectLink(from urlString: String, completion: @escaping (Result<String, Error>) -> ()) {
-    let urlString = urlString
-    guard let url = URL(string: urlString) else { return }
-    let request = NSMutableURLRequest(url: url)
-    request.setValue(Secrets.CLIENT_ID, forHTTPHeaderField: "Authorization")
-    request.httpMethod = "GET"
-    URLSession.shared.dataTask(with: request as URLRequest) { data, resp, err in
-        guard let data = data, err == nil else { return }
-        do {
-            if urlString.contains("image") {
-                let response = try JSONDecoder().decode(MMImgurImage.self, from: data)
-                completion(.success(response.data.link))
-            } else {
-                let response = try JSONDecoder().decode(MMImgurImages.self, from: data)
-                completion(.success(response.data.images[0].link))
+    
+    private func getImgurDirectLink(from urlString: String, completion: @escaping (Result<String, Error>) -> ()) {
+        let urlString = urlString
+        guard let url = URL(string: urlString) else { return }
+        let request = NSMutableURLRequest(url: url)
+        request.setValue(Secrets.CLIENT_ID, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request as URLRequest) { data, resp, err in
+            guard let data = data, err == nil else { return }
+            do {
+                if urlString.contains("image") {
+                    let response = try JSONDecoder().decode(DataPackage<MMImgurImage>.self, from: data)
+                    completion(.success(response.data.link))
+                } else {
+                    let response = try JSONDecoder().decode(DataPackage<MMImgurAlbum>.self, from: data)
+                    completion(.success(response.data.images[0].link))
+                }
+            } catch let error as NSError {
+                print(error)
             }
-        } catch let error as NSError {
-            print(error)
-        }
-    }.resume()
-}
-
-struct MMImgurImages: Decodable {
-    let data: MMImgurAlbum
-    
-    struct MMImgurAlbum: Decodable {
-        let images: [MMImgurImageLink]
-    }
-    
-    struct MMImgurImageLink: Decodable {
-        let link: String
-    }
-}
-
-struct MMImgurImage: Decodable {
-    let data: MMImgurImageLink
-    
-    struct MMImgurImageLink: Decodable {
-        let link: String
+        }.resume()
     }
 }

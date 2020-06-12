@@ -1,5 +1,5 @@
 //
-//  MMPageCellView.swift
+//  MMSellTradePage.swift
 //  mechmarket
 //
 //  Created by JohnAnthony on 6/9/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MMPageCellView: UICollectionViewCell {
+class MMSellTradePage: UICollectionViewCell {
     static let reuseIdentifier = "MMPageCellView"
     
     private lazy var collectionView: UICollectionView = {
@@ -23,6 +23,7 @@ class MMPageCellView: UICollectionViewCell {
     }()
     
     private lazy var listings = [MMListing]()
+    let dispatchGroup = DispatchGroup()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,9 +35,26 @@ class MMPageCellView: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reload(with listings: [MMListing]) {
-        self.listings = listings
-        collectionView.reloadData()
+    func reload(for origin: Country, and flair: MMFlair) {
+        dispatchGroup.enter()
+        var listings = [MMListing]()
+        MMService.shared.loadFeed(for: origin, and: flair) { res in
+            switch res {
+            case .success(let data):
+                data.forEach {
+                    listings.append($0.data)
+                }
+            case .failure(let err):
+                print("Failed to fetch data:", err)
+            }
+            
+            self.dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.listings = listings
+            self.collectionView.reloadData()
+        }
     }
     
     private func setup() {
@@ -52,7 +70,7 @@ class MMPageCellView: UICollectionViewCell {
     }
 }
 
-extension MMPageCellView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MMSellTradePage: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         10
     }
@@ -62,7 +80,7 @@ extension MMPageCellView: UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        listings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -73,9 +91,7 @@ extension MMPageCellView: UICollectionViewDataSource, UICollectionViewDelegateFl
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.systemPurple.cgColor // TODO: Determin color based on tab
         let imgView = UIImageView()
-        let imageUrlString = listing.imageUrlString
-   
-        imgView.loadImage(using: imageUrlString)
+        imgView.loadImage(using: listing.imageUrlString)
         
         imgView.contentMode = .scaleAspectFill
         cell.backgroundView = imgView

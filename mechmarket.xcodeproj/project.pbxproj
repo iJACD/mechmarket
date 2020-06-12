@@ -20,9 +20,14 @@
 		5D69405B248C93C1002D7466 /* MMClassifiedsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405A248C93C1002D7466 /* MMClassifiedsHeaderView.swift */; };
 		5D69405D248C9D58002D7466 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405C248C9D58002D7466 /* UIView+Extensions.swift */; };
 		5D69405F248CB1F3002D7466 /* MMRoundImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */; };
-		5D69406124908819002D7466 /* MMPageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406024908819002D7466 /* MMPageCellView.swift */; };
+		5D69406124908819002D7466 /* MMSellTradePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406024908819002D7466 /* MMSellTradePage.swift */; };
 		5D6940632492FF62002D7466 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */; };
 		5D6940672493420F002D7466 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940662493420F002D7466 /* Secrets.swift */; };
+		5D69406924934350002D7466 /* MMImgur+Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406824934350002D7466 /* MMImgur+Models.swift */; };
+		5D69406B24934681002D7466 /* DataPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406A24934681002D7466 /* DataPackage.swift */; };
+		5D69406D2493478A002D7466 /* MMListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406C2493478A002D7466 /* MMListing.swift */; };
+		5D69406F24942090002D7466 /* MMFlair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406E24942090002D7466 /* MMFlair.swift */; };
+		5D6940712494356C002D7466 /* MMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940702494356C002D7466 /* MMService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,9 +46,14 @@
 		5D69405A248C93C1002D7466 /* MMClassifiedsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMClassifiedsHeaderView.swift; sourceTree = "<group>"; };
 		5D69405C248C9D58002D7466 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRoundImageButton.swift; sourceTree = "<group>"; };
-		5D69406024908819002D7466 /* MMPageCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMPageCellView.swift; sourceTree = "<group>"; };
+		5D69406024908819002D7466 /* MMSellTradePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMSellTradePage.swift; sourceTree = "<group>"; };
 		5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		5D6940662493420F002D7466 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secrets.swift; path = ../../../../../.Trash/Secrets.swift; sourceTree = "<group>"; };
+		5D69406824934350002D7466 /* MMImgur+Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MMImgur+Models.swift"; sourceTree = "<group>"; };
+		5D69406A24934681002D7466 /* DataPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackage.swift; sourceTree = "<group>"; };
+		5D69406C2493478A002D7466 /* MMListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMListing.swift; sourceTree = "<group>"; };
+		5D69406E24942090002D7466 /* MMFlair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMFlair.swift; sourceTree = "<group>"; };
+		5D6940702494356C002D7466 /* MMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +93,7 @@
 				5D456A802489A1D1009FAD34 /* Controllers */,
 				5D456A6A24899E7C009FAD34 /* AppDelegate.swift */,
 				5D456A6C24899E7C009FAD34 /* SceneDelegate.swift */,
+				5D6940702494356C002D7466 /* MMService.swift */,
 				5D456A7324899E7D009FAD34 /* Assets.xcassets */,
 				5D456A7524899E7D009FAD34 /* LaunchScreen.storyboard */,
 				5D456A7824899E7D009FAD34 /* Info.plist */,
@@ -96,7 +107,7 @@
 				5D456A8D248A9E7F009FAD34 /* MMCountryButtonCell.swift */,
 				5D69405A248C93C1002D7466 /* MMClassifiedsHeaderView.swift */,
 				5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */,
-				5D69406024908819002D7466 /* MMPageCellView.swift */,
+				5D69406024908819002D7466 /* MMSellTradePage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -105,6 +116,10 @@
 			isa = PBXGroup;
 			children = (
 				5D456A8B248A8FCD009FAD34 /* Country.swift */,
+				5D69406824934350002D7466 /* MMImgur+Models.swift */,
+				5D69406A24934681002D7466 /* DataPackage.swift */,
+				5D69406C2493478A002D7466 /* MMListing.swift */,
+				5D69406E24942090002D7466 /* MMFlair.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -211,9 +226,14 @@
 				5D456A6F24899E7C009FAD34 /* MMHomeViewController.swift in Sources */,
 				5D694059248B348B002D7466 /* MMClassifiedsSwipeController.swift in Sources */,
 				5D69405D248C9D58002D7466 /* UIView+Extensions.swift in Sources */,
+				5D69406924934350002D7466 /* MMImgur+Models.swift in Sources */,
+				5D69406D2493478A002D7466 /* MMListing.swift in Sources */,
+				5D6940712494356C002D7466 /* MMService.swift in Sources */,
 				5D456A6B24899E7C009FAD34 /* AppDelegate.swift in Sources */,
 				5D456A8A248A8F77009FAD34 /* MMCountryTableDataSource.swift in Sources */,
-				5D69406124908819002D7466 /* MMPageCellView.swift in Sources */,
+				5D69406B24934681002D7466 /* DataPackage.swift in Sources */,
+				5D69406124908819002D7466 /* MMSellTradePage.swift in Sources */,
+				5D69406F24942090002D7466 /* MMFlair.swift in Sources */,
 				5D456A6D24899E7C009FAD34 /* SceneDelegate.swift in Sources */,
 				5D456A8E248A9E7F009FAD34 /* MMCountryButtonCell.swift in Sources */,
 				5D6940672493420F002D7466 /* Secrets.swift in Sources */,
