@@ -9,7 +9,7 @@
 import UIKit
 
 class MMSellTradePage: UICollectionViewCell {
-    static let reuseIdentifier = "MMPageCellView"
+    static let reuseIdentifier = "MMSellTradePage"
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -17,13 +17,13 @@ class MMSellTradePage: UICollectionViewCell {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "id")
+        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "colId")
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
     
     private lazy var listings = [MMListing]()
-    let dispatchGroup = DispatchGroup()
+    private lazy var dispatchGroup = DispatchGroup()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -85,11 +85,11 @@ extension MMSellTradePage: UICollectionViewDataSource, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let listing = listings[indexPath.item]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colId", for: indexPath)
         cell.layer.cornerRadius = 25.0
         cell.layer.masksToBounds = true
         cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.systemPurple.cgColor // TODO: Determin color based on tab
+        cell.layer.borderColor = UIColor.systemPurple.cgColor 
         let imgView = UIImageView()
         imgView.loadImage(using: listing.imageUrlString)
         

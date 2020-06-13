@@ -22,12 +22,16 @@
 		5D69405F248CB1F3002D7466 /* MMRoundImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */; };
 		5D69406124908819002D7466 /* MMSellTradePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406024908819002D7466 /* MMSellTradePage.swift */; };
 		5D6940632492FF62002D7466 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */; };
-		5D6940672493420F002D7466 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940662493420F002D7466 /* Secrets.swift */; };
 		5D69406924934350002D7466 /* MMImgur+Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406824934350002D7466 /* MMImgur+Models.swift */; };
 		5D69406B24934681002D7466 /* DataPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406A24934681002D7466 /* DataPackage.swift */; };
 		5D69406D2493478A002D7466 /* MMListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406C2493478A002D7466 /* MMListing.swift */; };
 		5D69406F24942090002D7466 /* MMFlair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406E24942090002D7466 /* MMFlair.swift */; };
 		5D6940712494356C002D7466 /* MMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940702494356C002D7466 /* MMService.swift */; };
+		5D694073249467F9002D7466 /* MMBuyingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D694072249467F9002D7466 /* MMBuyingPage.swift */; };
+		5D69407524947035002D7466 /* MMBuyingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69407424947035002D7466 /* MMBuyingListCell.swift */; };
+		5D69407724948762002D7466 /* MMSoldPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69407624948762002D7466 /* MMSoldPage.swift */; };
+		5D6940792494884A002D7466 /* MMSoldListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940782494884A002D7466 /* MMSoldListCell.swift */; };
+		5D69407B24956E13002D7466 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69407A24956E13002D7466 /* Secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,12 +52,16 @@
 		5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRoundImageButton.swift; sourceTree = "<group>"; };
 		5D69406024908819002D7466 /* MMSellTradePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMSellTradePage.swift; sourceTree = "<group>"; };
 		5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
-		5D6940662493420F002D7466 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secrets.swift; path = ../../../../../.Trash/Secrets.swift; sourceTree = "<group>"; };
 		5D69406824934350002D7466 /* MMImgur+Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MMImgur+Models.swift"; sourceTree = "<group>"; };
 		5D69406A24934681002D7466 /* DataPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackage.swift; sourceTree = "<group>"; };
 		5D69406C2493478A002D7466 /* MMListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMListing.swift; sourceTree = "<group>"; };
 		5D69406E24942090002D7466 /* MMFlair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMFlair.swift; sourceTree = "<group>"; };
 		5D6940702494356C002D7466 /* MMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMService.swift; sourceTree = "<group>"; };
+		5D694072249467F9002D7466 /* MMBuyingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMBuyingPage.swift; sourceTree = "<group>"; };
+		5D69407424947035002D7466 /* MMBuyingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMBuyingListCell.swift; sourceTree = "<group>"; };
+		5D69407624948762002D7466 /* MMSoldPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMSoldPage.swift; sourceTree = "<group>"; };
+		5D6940782494884A002D7466 /* MMSoldListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMSoldListCell.swift; sourceTree = "<group>"; };
+		5D69407A24956E13002D7466 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +116,10 @@
 				5D69405A248C93C1002D7466 /* MMClassifiedsHeaderView.swift */,
 				5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */,
 				5D69406024908819002D7466 /* MMSellTradePage.swift */,
+				5D694072249467F9002D7466 /* MMBuyingPage.swift */,
+				5D69407624948762002D7466 /* MMSoldPage.swift */,
+				5D69407424947035002D7466 /* MMBuyingListCell.swift */,
+				5D6940782494884A002D7466 /* MMSoldListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -147,7 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				5D456A87248A7BC7009FAD34 /* Constants.swift */,
-				5D6940662493420F002D7466 /* Secrets.swift */,
+				5D69407A24956E13002D7466 /* Secrets.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -224,23 +236,27 @@
 			files = (
 				5D6940632492FF62002D7466 /* UIImageView+Extensions.swift in Sources */,
 				5D456A6F24899E7C009FAD34 /* MMHomeViewController.swift in Sources */,
+				5D69407724948762002D7466 /* MMSoldPage.swift in Sources */,
 				5D694059248B348B002D7466 /* MMClassifiedsSwipeController.swift in Sources */,
 				5D69405D248C9D58002D7466 /* UIView+Extensions.swift in Sources */,
 				5D69406924934350002D7466 /* MMImgur+Models.swift in Sources */,
 				5D69406D2493478A002D7466 /* MMListing.swift in Sources */,
+				5D694073249467F9002D7466 /* MMBuyingPage.swift in Sources */,
 				5D6940712494356C002D7466 /* MMService.swift in Sources */,
 				5D456A6B24899E7C009FAD34 /* AppDelegate.swift in Sources */,
 				5D456A8A248A8F77009FAD34 /* MMCountryTableDataSource.swift in Sources */,
+				5D69407524947035002D7466 /* MMBuyingListCell.swift in Sources */,
 				5D69406B24934681002D7466 /* DataPackage.swift in Sources */,
 				5D69406124908819002D7466 /* MMSellTradePage.swift in Sources */,
 				5D69406F24942090002D7466 /* MMFlair.swift in Sources */,
 				5D456A6D24899E7C009FAD34 /* SceneDelegate.swift in Sources */,
 				5D456A8E248A9E7F009FAD34 /* MMCountryButtonCell.swift in Sources */,
-				5D6940672493420F002D7466 /* Secrets.swift in Sources */,
 				5D69405B248C93C1002D7466 /* MMClassifiedsHeaderView.swift in Sources */,
 				5D456A8C248A8FCD009FAD34 /* Country.swift in Sources */,
 				5D456A88248A7BC7009FAD34 /* Constants.swift in Sources */,
+				5D69407B24956E13002D7466 /* Secrets.swift in Sources */,
 				5D69405F248CB1F3002D7466 /* MMRoundImageButton.swift in Sources */,
+				5D6940792494884A002D7466 /* MMSoldListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,6 +35,8 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(MMSellTradePage.self, forCellWithReuseIdentifier: MMSellTradePage.reuseIdentifier)
+        collectionView.register(MMBuyingPage.self, forCellWithReuseIdentifier: MMBuyingPage.reuseIdentifier)
+        collectionView.register(MMSoldPage.self, forCellWithReuseIdentifier: MMSoldPage.reuseIdentifier)
         collectionView.backgroundColor = .white
         collectionView.isPagingEnabled = true
         
@@ -96,16 +98,38 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMSellTradePage.reuseIdentifier, for: indexPath) as? MMSellTradePage {
-            if let selectedCountry = selectedCountry,
-                let selectedFlair = selectedFlair {
-                cell.reload(for: selectedCountry, and: selectedFlair)
-            }
-            
-            cell.backgroundColor = .systemBackground
-            return cell
-        }
         
+        switch indexPath.item {
+        case 0:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMBuyingPage.reuseIdentifier, for: indexPath) as? MMBuyingPage {
+                if let selectedCountry = selectedCountry {
+                    cell.reload(for: selectedCountry, and: .buying)
+                }
+                
+                cell.backgroundColor = .systemBackground
+                return cell
+            }
+        case 1:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMSellTradePage.reuseIdentifier, for: indexPath) as? MMSellTradePage {
+                if let selectedCountry = selectedCountry {
+                    cell.reload(for: selectedCountry, and: .sellingOrTrading)
+                }
+                
+                cell.backgroundColor = .systemBackground
+                return cell
+            }
+        case 2:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMSoldPage.reuseIdentifier, for: indexPath) as? MMSoldPage {
+                if let selectedCountry = selectedCountry {
+                    cell.reload(for: selectedCountry, and: .soldOrPurchased)
+                }
+                cell.backgroundColor = .systemBackground
+                return cell
+            }
+        default:
+            return UICollectionViewCell()
+        }
+            
         return UICollectionViewCell()
     }
     
