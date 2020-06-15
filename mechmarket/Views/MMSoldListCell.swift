@@ -26,8 +26,8 @@ final class MMSoldListCell: UITableViewCell {
         detailTextLabel?.text = "u/"+listing.author
         
         if !listing.imageUrlString.isEmpty {
-            let imgView = UIImageView()
-            imgView.loadImage(using: listing.imageUrlString)
+            let imgView = CachedImageView()
+            imgView.loadImage(urlString: listing.imageUrlString)
             imgView.contentMode = .scaleAspectFill
             accessoryView = imgView
             accessoryView?.layer.masksToBounds = true

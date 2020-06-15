@@ -90,8 +90,8 @@ extension MMSellTradePage: UICollectionViewDataSource, UICollectionViewDelegateF
         cell.layer.masksToBounds = true
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.systemPurple.cgColor 
-        let imgView = UIImageView()
-        imgView.loadImage(using: listing.imageUrlString)
+        let imgView = CachedImageView()
+        imgView.loadImage(urlString: listing.imageUrlString)
         
         imgView.contentMode = .scaleAspectFill
         cell.backgroundView = imgView

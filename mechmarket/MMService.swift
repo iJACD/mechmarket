@@ -65,7 +65,7 @@ struct MMService {
                         completion(.success(response.data.images[0].link))
                     }
                 } catch let error as NSError {
-                    print(error)
+                    print("🛑", error, "\n")
                 }
             }.resume()
         }

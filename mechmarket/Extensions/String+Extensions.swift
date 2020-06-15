@@ -42,9 +42,9 @@ extension String {
         var string = self
         string = string.replacingOccurrences(of: "http://", with: "https://").stripped
         
-        if !string.contains("/a") { // checks for album imgur link
-            if !string.contains("/gallery") { // checks for gallery imgur link
-                if !string.contains(".jpg") { // checks for imgur link already direct link
+        if !string.contains("/a/") { // checks for album imgur link
+            if !string.contains("/gallery/") { // checks for gallery imgur link
+                if !string.contains(".jpg") && !string.contains(".png"){ // checks for imgur link already direct link
                     string = string.replacingOccurrences(
                         of: MM.Imgur.baseUrl,
                         with: MM.Imgur.apiBaseUrl+MM.Imgur.image)

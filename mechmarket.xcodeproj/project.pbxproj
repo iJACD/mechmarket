@@ -21,7 +21,6 @@
 		5D69405D248C9D58002D7466 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405C248C9D58002D7466 /* UIView+Extensions.swift */; };
 		5D69405F248CB1F3002D7466 /* MMRoundImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */; };
 		5D69406124908819002D7466 /* MMSellTradePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406024908819002D7466 /* MMSellTradePage.swift */; };
-		5D6940632492FF62002D7466 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */; };
 		5D69406924934350002D7466 /* MMImgur+Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406824934350002D7466 /* MMImgur+Models.swift */; };
 		5D69406B24934681002D7466 /* DataPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406A24934681002D7466 /* DataPackage.swift */; };
 		5D69406D2493478A002D7466 /* MMListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69406C2493478A002D7466 /* MMListing.swift */; };
@@ -34,6 +33,8 @@
 		5D69407B24956E13002D7466 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69407A24956E13002D7466 /* Secrets.swift */; };
 		5D69407D24972A34002D7466 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69407C24972A34002D7466 /* String+Extensions.swift */; };
 		5D69407F24972D88002D7466 /* MMCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D69407E24972D88002D7466 /* MMCategoryButton.swift */; };
+		5D6940812497326F002D7466 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6940802497326F002D7466 /* CachedImageView.swift */; };
+		5D694083249732BF002D7466 /* DiscardableImageCacheItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D694082249732BF002D7466 /* DiscardableImageCacheItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +54,6 @@
 		5D69405C248C9D58002D7466 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5D69405E248CB1F3002D7466 /* MMRoundImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMRoundImageButton.swift; sourceTree = "<group>"; };
 		5D69406024908819002D7466 /* MMSellTradePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMSellTradePage.swift; sourceTree = "<group>"; };
-		5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		5D69406824934350002D7466 /* MMImgur+Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MMImgur+Models.swift"; sourceTree = "<group>"; };
 		5D69406A24934681002D7466 /* DataPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackage.swift; sourceTree = "<group>"; };
 		5D69406C2493478A002D7466 /* MMListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMListing.swift; sourceTree = "<group>"; };
@@ -66,6 +66,8 @@
 		5D69407A24956E13002D7466 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		5D69407C24972A34002D7466 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5D69407E24972D88002D7466 /* MMCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMCategoryButton.swift; sourceTree = "<group>"; };
+		5D6940802497326F002D7466 /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
+		5D694082249732BF002D7466 /* DiscardableImageCacheItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardableImageCacheItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		5D456A6924899E7C009FAD34 /* mechmarket */ = {
 			isa = PBXGroup;
 			children = (
+				5D694084249732D8002D7466 /* OpenSourceHelpers */,
 				5D456A86248A7B40009FAD34 /* Constants */,
 				5D456A812489A1E9009FAD34 /* Extensions */,
 				5D456A7F2489A1BF009FAD34 /* Models */,
@@ -155,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				5D69405C248C9D58002D7466 /* UIView+Extensions.swift */,
-				5D6940622492FF62002D7466 /* UIImageView+Extensions.swift */,
 				5D69407C24972A34002D7466 /* String+Extensions.swift */,
 			);
 			path = Extensions;
@@ -168,6 +170,15 @@
 				5D69407A24956E13002D7466 /* Secrets.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		5D694084249732D8002D7466 /* OpenSourceHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				5D6940802497326F002D7466 /* CachedImageView.swift */,
+				5D694082249732BF002D7466 /* DiscardableImageCacheItem.swift */,
+			);
+			path = OpenSourceHelpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,7 +251,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D6940632492FF62002D7466 /* UIImageView+Extensions.swift in Sources */,
 				5D456A6F24899E7C009FAD34 /* MMHomeViewController.swift in Sources */,
 				5D69407724948762002D7466 /* MMSoldPage.swift in Sources */,
 				5D694059248B348B002D7466 /* MMClassifiedsSwipeController.swift in Sources */,
@@ -260,8 +270,10 @@
 				5D456A6D24899E7C009FAD34 /* SceneDelegate.swift in Sources */,
 				5D456A8E248A9E7F009FAD34 /* MMCountryButtonCell.swift in Sources */,
 				5D69405B248C93C1002D7466 /* MMClassifiedsHeaderView.swift in Sources */,
+				5D694083249732BF002D7466 /* DiscardableImageCacheItem.swift in Sources */,
 				5D456A8C248A8FCD009FAD34 /* Country.swift in Sources */,
 				5D456A88248A7BC7009FAD34 /* Constants.swift in Sources */,
+				5D6940812497326F002D7466 /* CachedImageView.swift in Sources */,
 				5D69407B24956E13002D7466 /* Secrets.swift in Sources */,
 				5D69405F248CB1F3002D7466 /* MMRoundImageButton.swift in Sources */,
 				5D6940792494884A002D7466 /* MMSoldListCell.swift in Sources */,
