@@ -6,4 +6,29 @@
 //  Copyright © 2020 iJACD. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class MMCategoryButton: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    static func configure(color: UIColor, and text: String) -> MMCategoryButton {
+        let button = MMCategoryButton(frame: .zero)
+        button.backgroundColor = color
+        button.setTitle(text, for: .normal)
+        return button
+    }
+    
+    private func setup() {
+        titleLabel?.font = UIFont(name: MM.FontNamed.HelveticaLight, size: 14)
+        layer.cornerRadius = 15
+        layer.masksToBounds = true
+    }
+}

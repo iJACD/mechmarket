@@ -33,4 +33,12 @@ public struct MM {
         static let sellOrTrade = "Selling/Trading"
         static let sold = "Sold"
     }
+    
+    struct Imgur {
+        static let baseUrl = "https://imgur.com"
+        static let apiBaseUrl = "https://api.imgur.com/3"
+        static let image = "/image"
+        static let gallery = "/gallery/album"
+        static let album = "/album"
+    }
 }

@@ -56,28 +56,19 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     
     @objc func didTapBuying() {
         let indexPath = IndexPath(item: 0, section: 0)
-        if let cell = collectionView(collectionView, cellForItemAt: indexPath) as? MMSellTradePage {
-            selectedFlair = .buying
-            cell.reload(for: selectedCountry!, and: selectedFlair!)
-        }
+        selectedFlair = .buying
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 
     @objc func didTapSellTrade() {
         let indexPath = IndexPath(item: 1, section: 0)
-        if let cell = collectionView(collectionView, cellForItemAt: indexPath) as? MMSellTradePage {
-            selectedFlair = .sellingOrTrading
-            cell.reload(for: selectedCountry!, and: selectedFlair!)
-        }
+        selectedFlair = .sellingOrTrading
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 
     @objc func didTapSold() {
         let indexPath = IndexPath(item: 2, section: 0)
-        if let cell = collectionView(collectionView, cellForItemAt: indexPath) as? MMSellTradePage {
-            selectedFlair = .soldOrPurchased
-            cell.reload(for: selectedCountry!, and: selectedFlair!)
-        }
+        selectedFlair = .soldOrPurchased
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     

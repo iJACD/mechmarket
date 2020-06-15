@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct MMImgurGallery: Decodable {
+    let images: [MMImgurImage]
+}
+
 struct MMImgurAlbum: Decodable {
     let images: [MMImgurImage]
 }
