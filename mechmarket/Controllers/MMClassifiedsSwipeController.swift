@@ -28,6 +28,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         let v = MMClassifiedsSwipeController(collectionViewLayout: layout)
         v.selectedCountry = country
         v.selectedFlair = .sellingOrTrading // First page to show.
+        v.headerView.shrinkButton(for: .sellingOrTrading)
         
         return v
     }
@@ -58,18 +59,21 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         let indexPath = IndexPath(item: 0, section: 0)
         selectedFlair = .buying
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        headerView.shrinkButton(for: .buying)
     }
 
     @objc func didTapSellTrade() {
         let indexPath = IndexPath(item: 1, section: 0)
         selectedFlair = .sellingOrTrading
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        headerView.shrinkButton(for: .sellingOrTrading)
     }
 
     @objc func didTapSold() {
         let indexPath = IndexPath(item: 2, section: 0)
         selectedFlair = .soldOrPurchased
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        headerView.shrinkButton(for: .soldOrPurchased)
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
