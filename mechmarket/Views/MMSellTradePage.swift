@@ -11,6 +11,12 @@ import UIKit
 class MMSellTradePage: UICollectionViewCell {
     static let reuseIdentifier = "MMSellTradePage"
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        return rc
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -19,11 +25,13 @@ class MMSellTradePage: UICollectionViewCell {
         cv.dataSource = self
         cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "colId")
         cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.refreshControl = self.refreshControl
         return cv
     }()
     
     private lazy var listings = [MMListing]()
     private lazy var dispatchGroup = DispatchGroup()
+    private var selectedCountry: Country?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,10 +43,12 @@ class MMSellTradePage: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reload(for origin: Country, and flair: MMFlair) {
+    func reload(for origin: Country) {
         dispatchGroup.enter()
+        refreshControl.beginRefreshing()
+        selectedCountry = origin
         var listings = [MMListing]()
-        MMService.shared.loadFeed(for: origin, and: flair) { res in
+        MMService.shared.loadFeed(for: origin, and: .sellingOrTrading) { res in
             switch res {
             case .success(let data):
                 data.forEach {
@@ -54,6 +64,7 @@ class MMSellTradePage: UICollectionViewCell {
         dispatchGroup.notify(queue: .main) {
             self.listings = listings
             self.collectionView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -67,6 +78,12 @@ class MMSellTradePage: UICollectionViewCell {
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+    
+    @objc func didPullToRefresh() {
+        if let selectedCountry = selectedCountry {
+            reload(for: selectedCountry)
+        }
     }
 }
 

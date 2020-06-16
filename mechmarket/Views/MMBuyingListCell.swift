@@ -24,18 +24,6 @@ final class MMBuyingListCell: UITableViewCell {
     func configure(with listing: MMListing) {
         textLabel?.text = listing.title
         detailTextLabel?.text = "u/"+listing.author
-        
-        if !listing.imageUrlString.isEmpty {
-            let imgView = CachedImageView()
-            imgView.loadImage(urlString: listing.imageUrlString)
-            imgView.contentMode = .scaleAspectFill
-            accessoryView = imgView
-            accessoryView?.layer.masksToBounds = true
-            accessoryView?.layer.cornerRadius = 5
-            accessoryView?.layer.borderWidth = 1
-            accessoryView?.layer.borderColor = UIColor.secondaryLabel.cgColor
-            accessoryView?.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-        }
     }
     
     private func setup() {

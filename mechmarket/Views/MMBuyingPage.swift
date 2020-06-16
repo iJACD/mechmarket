@@ -11,6 +11,12 @@ import UIKit
 class MMBuyingPage: UICollectionViewCell {
     static let reuseIdentifier = "MMBuyingPage"
     private let spacing: CGFloat = 10
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        return rc
+    }()
 
     private lazy var tableView: UITableView = {
         let tbl = UITableView(frame: .zero, style: .plain)
@@ -20,12 +26,14 @@ class MMBuyingPage: UICollectionViewCell {
         tbl.separatorStyle = .none
         tbl.backgroundColor = .clear
         tbl.translatesAutoresizingMaskIntoConstraints = false
+        tbl.refreshControl = self.refreshControl
         return tbl
     }()
     
     private lazy var listings = [MMListing]()
     private lazy var dispatchGroup = DispatchGroup()
-    
+    private var selectedCountry: Country?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -36,10 +44,13 @@ class MMBuyingPage: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reload(for origin: Country, and flair: MMFlair) {
+    func reload(for origin: Country) {
         dispatchGroup.enter()
+        refreshControl.beginRefreshing()
+        selectedCountry = origin
+
         var listings = [MMListing]()
-        MMService.shared.loadFeed(for: origin, and: flair) { res in
+        MMService.shared.loadFeed(for: origin, and: .buying) { res in
             switch res {
             case .success(let data):
                 data.forEach {
@@ -55,6 +66,7 @@ class MMBuyingPage: UICollectionViewCell {
         dispatchGroup.notify(queue: .main) {
             self.listings = listings
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -68,6 +80,12 @@ class MMBuyingPage: UICollectionViewCell {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+    
+    @objc func didPullToRefresh() {
+        if let selectedCountry = selectedCountry {
+            reload(for: selectedCountry)
+        }
     }
 }
 
@@ -99,6 +117,17 @@ extension MMBuyingPage: UITableViewDataSource, UITableViewDelegate {
         
         if let buyingListCell = tableView.dequeueReusableCell(withIdentifier: MMBuyingListCell.reuseIdentifier) as? MMBuyingListCell  {
             buyingListCell.configure(with: listing)
+            let imgView = CachedImageView()
+            if !listing.imageUrlString.isEmpty {
+                imgView.loadImage(urlString: listing.imageUrlString)
+            }
+            imgView.contentMode = .scaleAspectFill
+            buyingListCell.accessoryView = imgView
+            buyingListCell.accessoryView?.layer.masksToBounds = true
+            buyingListCell.accessoryView?.layer.cornerRadius = 5
+            buyingListCell.accessoryView?.layer.borderWidth = 1
+            buyingListCell.accessoryView?.layer.borderColor = UIColor.secondaryLabel.cgColor
+            buyingListCell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
             return buyingListCell
         }
         

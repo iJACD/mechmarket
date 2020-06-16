@@ -94,7 +94,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         case 0:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMBuyingPage.reuseIdentifier, for: indexPath) as? MMBuyingPage {
                 if let selectedCountry = selectedCountry {
-                    cell.reload(for: selectedCountry, and: .buying)
+                    cell.reload(for: selectedCountry)
                 }
                 
                 cell.backgroundColor = .systemBackground
@@ -103,7 +103,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         case 1:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMSellTradePage.reuseIdentifier, for: indexPath) as? MMSellTradePage {
                 if let selectedCountry = selectedCountry {
-                    cell.reload(for: selectedCountry, and: .sellingOrTrading)
+                    cell.reload(for: selectedCountry)
                 }
                 
                 cell.backgroundColor = .systemBackground
@@ -112,7 +112,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         case 2:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMSoldPage.reuseIdentifier, for: indexPath) as? MMSoldPage {
                 if let selectedCountry = selectedCountry {
-                    cell.reload(for: selectedCountry, and: .soldOrPurchased)
+                    cell.reload(for: selectedCountry)
                 }
                 cell.backgroundColor = .systemBackground
                 return cell
