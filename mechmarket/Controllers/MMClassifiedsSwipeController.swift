@@ -28,8 +28,6 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         let v = MMClassifiedsSwipeController(collectionViewLayout: layout)
         v.selectedCountry = country
         v.selectedFlair = .sellingOrTrading // First page to show.
-        v.headerView.shrinkButton(for: .sellingOrTrading)
-        
         return v
     }
     
@@ -65,22 +63,36 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     @objc func didTapSellTrade() {
         let indexPath = IndexPath(item: 1, section: 0)
         selectedFlair = .sellingOrTrading
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         headerView.shrinkButton(for: .sellingOrTrading)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 
     @objc func didTapSold() {
         let indexPath = IndexPath(item: 2, section: 0)
         selectedFlair = .soldOrPurchased
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         headerView.shrinkButton(for: .soldOrPurchased)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isInitialLoad {
             let indexPath = IndexPath(item: 1, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            UIView.performWithoutAnimation {
+                headerView.shrinkSellTradeButton()
+                collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            }
             isInitialLoad = false
+        } else {
+            switch indexPath.item {
+            case 0:
+                headerView.shrinkButton(for: .buying)
+            case 1:
+                headerView.shrinkButton(for: .sellingOrTrading)
+            case 2:
+                headerView.shrinkButton(for: .soldOrPurchased)
+            default:
+                return
+            }
         }
     }
     

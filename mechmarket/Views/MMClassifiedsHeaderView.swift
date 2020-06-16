@@ -106,10 +106,16 @@ final class MMClassifiedsHeaderView: UIView {
         return header
     }
     
+    func shrinkSellTradeButton() {
+        self.sellingAndTradingButton.isUserInteractionEnabled = false
+        self.sellingAndTradingButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+    }
+    
     func shrinkButton(for flair: MMFlair) {
+        let options: UIView.AnimationOptions = [.allowUserInteraction, .beginFromCurrentState]
         switch flair {
         case .buying:
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: options, animations: {
                 self.buyingButton.isUserInteractionEnabled = false
                 self.buyingButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 
@@ -118,13 +124,9 @@ final class MMClassifiedsHeaderView: UIView {
                 
                 self.soldButton.isUserInteractionEnabled = true
                 self.soldButton.transform = .identity
-            }) { _ in
-                UIView.animate(withDuration: 0.2) {
-                    self.buyingButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-                }
-            }
+            })
         case .sellingOrTrading:
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: options, animations: {
                 self.sellingAndTradingButton.isUserInteractionEnabled = false
                 self.sellingAndTradingButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 
@@ -133,13 +135,9 @@ final class MMClassifiedsHeaderView: UIView {
                 
                 self.soldButton.isUserInteractionEnabled = true
                 self.soldButton.transform = .identity
-            }) { _ in
-                UIView.animate(withDuration: 0.2) {
-                    self.sellingAndTradingButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-                }
-            }
+            })
         case .soldOrPurchased:
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: options, animations: {
                 self.soldButton.isUserInteractionEnabled = false
                 self.soldButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 
@@ -148,11 +146,7 @@ final class MMClassifiedsHeaderView: UIView {
                 
                 self.sellingAndTradingButton.isUserInteractionEnabled = true
                 self.sellingAndTradingButton.transform = .identity
-            }) { _ in
-                UIView.animate(withDuration: 0.2) {
-                    self.soldButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-                }
-            }
+            })
         }
     }
     

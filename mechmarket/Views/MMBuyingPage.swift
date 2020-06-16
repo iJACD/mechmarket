@@ -65,8 +65,8 @@ class MMBuyingPage: UICollectionViewCell {
         
         dispatchGroup.notify(queue: .main) {
             self.listings = listings
-            self.tableView.reloadData()
             self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
         }
     }
     

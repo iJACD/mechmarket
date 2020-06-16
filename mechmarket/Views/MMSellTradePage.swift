@@ -63,8 +63,8 @@ class MMSellTradePage: UICollectionViewCell {
         
         dispatchGroup.notify(queue: .main) {
             self.listings = listings
-            self.collectionView.reloadData()
             self.refreshControl.endRefreshing()
+            self.collectionView.reloadData()
         }
     }
     
