@@ -66,4 +66,21 @@ extension String {
         let okayChars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890+-_:/.")
         return self.filter { okayChars.contains($0) }
     }
+    
+    func flairFromString() -> MMFlair? {
+        switch self.lowercased() {
+        case "buying":
+            return .buying
+        case "selling":
+            return .selling
+        case "trading":
+            return.trading
+        case "sold":
+            return .sold
+        case "purchased":
+            return .purchased
+        default:
+            return nil
+        }
+    }
 }

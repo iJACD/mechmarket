@@ -67,11 +67,11 @@ final class MMClassifiedsHeaderView: UIView {
         return btn
     }()
     
-    private lazy var buyingButton: UIButton = MMCategoryButton.configure(color: .systemBlue, and: MM.ButtonTitles.buying)
+    private lazy var buyingButton: UIButton = MMCategoryButton.configure(color: .systemBlue, and: MMFlair.buying.description)
     
-    private lazy var sellingAndTradingButton: UIButton = MMCategoryButton.configure(color: .systemPurple, and: MM.ButtonTitles.sellOrTrade)
+    private lazy var sellingAndTradingButton: UIButton = MMCategoryButton.configure(color: .systemPurple, and: MMFlair.sellingOrTrading.description)
     
-    private lazy var soldButton: UIButton = MMCategoryButton.configure(color: .systemRed, and: MM.ButtonTitles.sold)
+    private lazy var soldButton: UIButton = MMCategoryButton.configure(color: .systemRed, and: MMFlair.sold.description)
     
     private lazy var buttonHStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -147,6 +147,8 @@ final class MMClassifiedsHeaderView: UIView {
                 self.sellingAndTradingButton.isUserInteractionEnabled = true
                 self.sellingAndTradingButton.transform = .identity
             })
+        default:
+            return
         }
     }
     

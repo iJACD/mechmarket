@@ -31,4 +31,9 @@ struct MMListing: Decodable {
             selftext.returnUrlString()
         }
     }
+    var getFlair: MMFlair? {
+        get {
+            link_flair_text.flairFromString()
+        }
+    }
 }

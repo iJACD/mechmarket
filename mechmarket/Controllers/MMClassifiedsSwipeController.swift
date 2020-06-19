@@ -25,10 +25,10 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-        let v = MMClassifiedsSwipeController(collectionViewLayout: layout)
-        v.selectedCountry = country
-        v.selectedFlair = .sellingOrTrading // First page to show.
-        return v
+        let vc = MMClassifiedsSwipeController(collectionViewLayout: layout)
+        vc.selectedCountry = country
+        vc.selectedFlair = .sellingOrTrading // First page to show.
+        return vc
     }
     
     override func viewDidLoad() {
@@ -112,8 +112,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
                 if let selectedCountry = selectedCountry {
                     cell.reload(for: selectedCountry)
                 }
-                
-                cell.backgroundColor = .systemBackground
+                cell.delegate = self
                 return cell
             }
         case 1:
@@ -121,8 +120,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
                 if let selectedCountry = selectedCountry {
                     cell.reload(for: selectedCountry)
                 }
-                
-                cell.backgroundColor = .systemBackground
+                cell.delegate = self
                 return cell
             }
         case 2:
@@ -130,7 +128,7 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
                 if let selectedCountry = selectedCountry {
                     cell.reload(for: selectedCountry)
                 }
-                cell.backgroundColor = .systemBackground
+                cell.delegate = self
                 return cell
             }
         default:
@@ -145,4 +143,13 @@ class MMClassifiedsSwipeController: UICollectionViewController, UICollectionView
     }
 }
 
+extension MMClassifiedsSwipeController: MMClassifiedsPageDelegate {
+    func didSelectMMPageCell(with listing: MMListing?) {
+        if let listing = listing {
+            let vc = MMListingDetailsViewController.configure(with: listing)
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        }
+    }
+}
 

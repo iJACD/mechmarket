@@ -17,6 +17,7 @@ public struct MM {
     struct Images {
         static let keyBoardImage = UIImage(named: "keyboardImage")
         static let optionsButton = UIImage(systemName: "ellipsis", withConfiguration: UIImage.SymbolConfiguration(weight: .black))
+        static let closeButton = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(weight: .black))
     }
     
     struct FontNamed {
@@ -26,12 +27,6 @@ public struct MM {
     
     struct Links {
         static let mechmarket = "https://www.reddit.com/r/mechmarket"
-    }
-    
-    struct ButtonTitles {
-        static let buying = "Buying"
-        static let sellOrTrade = "Selling/Trading"
-        static let sold = "Sold"
     }
     
     struct Imgur {

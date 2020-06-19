@@ -23,7 +23,7 @@ class MMSellTradePage: UICollectionViewCell {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "colId")
+        cv.register(MMSellTradeCollectionCell.self, forCellWithReuseIdentifier: MMSellTradeCollectionCell.reuseIdentifier)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.refreshControl = self.refreshControl
         return cv
@@ -32,6 +32,7 @@ class MMSellTradePage: UICollectionViewCell {
     private lazy var listings = [MMListing]()
     private lazy var dispatchGroup = DispatchGroup()
     private var selectedCountry: Country?
+    weak var delegate: MMClassifiedsPageDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,6 +70,7 @@ class MMSellTradePage: UICollectionViewCell {
     }
     
     private func setup() {
+        backgroundColor = .systemBackground
         collectionView.backgroundColor = .systemBackground
         addSubview(collectionView)
         
@@ -100,19 +102,24 @@ extension MMSellTradePage: UICollectionViewDataSource, UICollectionViewDelegateF
         listings.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let listing = listings[indexPath.item]
+        delegate?.didSelectMMPageCell(with: listing)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let listing = listings[indexPath.item]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colId", for: indexPath)
-        cell.layer.cornerRadius = 25.0
-        cell.layer.masksToBounds = true
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.systemPurple.cgColor 
-        let imgView = CachedImageView()
-        imgView.loadImage(urlString: listing.imageUrlString)
         
-        imgView.contentMode = .scaleAspectFill
-        cell.backgroundView = imgView
-        return cell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MMSellTradeCollectionCell.reuseIdentifier, for: indexPath) as? MMSellTradeCollectionCell {
+            cell.configure(with: listing)
+            let imgView = CachedImageView()
+            imgView.loadImage(urlString: listing.imageUrlString)
+            imgView.contentMode = .scaleAspectFill
+            cell.backgroundView = imgView
+            return cell
+        }
+        
+        return MMSellTradeCollectionCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -125,4 +132,8 @@ extension MMSellTradePage: UICollectionViewDataSource, UICollectionViewDelegateF
         
         return CGSize(width: width, height: width)
     }
+}
+
+protocol MMClassifiedsPageDelegate: class {
+    func didSelectMMPageCell(with listing: MMListing?)
 }

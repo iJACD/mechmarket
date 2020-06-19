@@ -27,7 +27,13 @@ class MMCategoryButton: UIButton {
     }
     
     private func setup() {
-        titleLabel?.font = UIFont(name: MM.FontNamed.HelveticaLight, size: 14)
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: 40),
+            widthAnchor.constraint(equalToConstant: 80)
+        ])
+        layer.cornerRadius = 20
+        titleLabel?.font = UIFont(name: MM.FontNamed.HelveticaBold, size: 14)
         layer.cornerRadius = 15
         layer.masksToBounds = true
     }

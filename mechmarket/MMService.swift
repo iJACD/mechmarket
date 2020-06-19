@@ -16,7 +16,7 @@ struct MMService {
     
     /// Loads feed for specified origin, and flair from mechmarket subreddit. Ordering by new.
     func loadFeed(for origin: Country, and flair: MMFlair, completion: @escaping (Result<[MMListingData], Error>) -> ()) {
-        let urlString = "\(baseURL)/\(subreddit)/search.json?q=\(origin.queryString)\(flair.description)&restrict_sr=on&sort=new&limit=30"
+        let urlString = "\(baseURL)/\(subreddit)/search.json?q=\(origin.queryString)\(flair.queryString)&restrict_sr=on&sort=new&limit=30"
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, resp, err in

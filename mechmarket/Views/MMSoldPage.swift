@@ -33,6 +33,7 @@ class MMSoldPage: UICollectionViewCell {
     private lazy var listings = [MMListing]()
     private lazy var dispatchGroup = DispatchGroup()
     private var selectedCountry: Country?
+    weak var delegate: MMClassifiedsPageDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,6 +72,7 @@ class MMSoldPage: UICollectionViewCell {
     }
     
     private func setup() {
+        backgroundColor = .systemBackground
         tableView.backgroundColor = .systemBackground
         addSubview(tableView)
         
@@ -110,6 +112,11 @@ extension MMSoldPage: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let listing = listings[indexPath.section]
+        delegate?.didSelectMMPageCell(with: listing)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
