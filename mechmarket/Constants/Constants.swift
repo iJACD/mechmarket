@@ -23,6 +23,7 @@ public struct MM {
     struct FontNamed {
         static let HelveticaBold = "Helvetica-Bold"
         static let HelveticaLight = "Helvetica-Light"
+        static let Helvetica = "Helvetica"
     }
     
     struct Links {

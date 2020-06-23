@@ -38,8 +38,8 @@ extension MMCountryTableDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let country = countries[indexPath.section]
         
-        if let countryButton = tableView.dequeueReusableCell(withIdentifier: MMCountryButtonCell.reuseIdentifier) as? MMCountryButtonCell  {
-            countryButton.configure(with: country)
+        if let countryButton = tableView.dequeueReusableCell(withIdentifier: MMButtonTableCell.reuseIdentifier) as? MMButtonTableCell  {
+            countryButton.configure(with: country.name)
             return countryButton
         }
         

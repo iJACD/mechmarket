@@ -27,6 +27,7 @@ struct MMService {
             
             do {
                 let response = try JSONDecoder().decode(DataPackage<MMEmbededData>.self, from: data ?? Data())
+                print("⚪️ Request URL: \(urlString)")
                 completion(.success(response.data.children))
             } catch let jsonErr {
                 completion(.failure(jsonErr))

@@ -42,17 +42,17 @@ class MMFlairTagLabel: UILabel {
         
         switch flair {
         case .buying:
-            color = .systemBlue
+            color = UIColor.systemBlue.withAlphaComponent(0.85)
         case .selling:
-            color = .systemPurple
+            color = UIColor.systemPurple.withAlphaComponent(0.85)
         case .trading:
-            color = .systemGreen
+            color = UIColor.systemGreen.withAlphaComponent(0.85)
         case .sold:
-            color = .systemRed
+            color = UIColor.systemRed.withAlphaComponent(0.85)
         case .purchased:
-            color = .systemYellow
+            color = UIColor.systemYellow.withAlphaComponent(0.85)
         default:
-            color = .white
+            color = UIColor.white.withAlphaComponent(0.85)
         }
         
         return color

@@ -23,6 +23,8 @@ class GumGumHeaderLayout: UICollectionViewFlowLayout {
                 $0.frame = CGRect(x: 0, y: contentOffsetY,
                                   width: width, height: height)
                 
+            } else {
+            
             }
         }
         

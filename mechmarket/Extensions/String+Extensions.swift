@@ -41,6 +41,7 @@ extension String {
     var formatedImgurUrlString: String {
         var string = self
         string = string.replacingOccurrences(of: "http://", with: "https://").stripped
+        string = string.replacingOccurrences(of: "://m.", with: "://")
         
         if !string.contains("/a/") { // checks for album imgur link
             if !string.contains("/gallery/") { // checks for gallery imgur link
@@ -83,4 +84,16 @@ extension String {
             return nil
         }
     }
+    
+    var htmlToAttributedString: NSAttributedString? {
+           guard let data = data(using: .utf8) else { return NSAttributedString() }
+           do {
+               return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+           } catch {
+               return NSAttributedString()
+           }
+       }
+       var htmlToString: String {
+           return htmlToAttributedString?.string ?? ""
+       }
 }

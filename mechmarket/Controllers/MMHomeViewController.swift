@@ -33,7 +33,7 @@ class MMHomeViewController: UIViewController {
         let tbl = UITableView(frame: .zero, style: .plain)
         tbl.delegate = self
         tbl.dataSource = countryTableDataSource
-        tbl.register(MMCountryButtonCell.self, forCellReuseIdentifier: MMCountryButtonCell.reuseIdentifier)
+        tbl.register(MMButtonTableCell.self, forCellReuseIdentifier: MMButtonTableCell.reuseIdentifier)
         tbl.isScrollEnabled = false
         tbl.separatorStyle = .none
         tbl.backgroundColor = .clear
