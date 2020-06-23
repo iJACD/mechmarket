@@ -24,11 +24,13 @@ extension String {
             urlStrings.append(String(url))
         }
         
-        guard let urlString = urlStrings.first else { return "" }
-        
-        if urlString.contains("imgur") {
+        if let urlString = urlStrings.first(where: {
+            $0.contains("imgur") /* Optistically avoids sending back urls in text that aren't images
+                                    Does not acount for other image hosts such as google drive. */
+        }) {
             return urlString.formatedImgurUrlString
-        } else if let url = URL(string: urlString) {
+        } else if let urlString = urlStrings.first,
+                  let url = URL(string: urlString) {
             if UIApplication.shared.canOpenURL(url) {
                 return urlString
             }
@@ -86,14 +88,15 @@ extension String {
     }
     
     var htmlToAttributedString: NSAttributedString? {
-           guard let data = data(using: .utf8) else { return NSAttributedString() }
-           do {
-               return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
-           } catch {
-               return NSAttributedString()
-           }
+       guard let data = data(using: .utf8) else { return NSAttributedString() }
+       do {
+           return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+       } catch {
+           return NSAttributedString()
        }
-       var htmlToString: String {
-           return htmlToAttributedString?.string ?? ""
-       }
+   }
+
+   var htmlToString: String {
+       return htmlToAttributedString?.string ?? ""
+   }
 }
