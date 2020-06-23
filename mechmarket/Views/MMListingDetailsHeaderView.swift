@@ -38,7 +38,7 @@ final class MMListingDetailsHeaderView: UICollectionReusableView {
     private lazy var userNameLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont(name: MM.FontNamed.HelveticaBold, size: 18)
-        lbl.textColor = .white
+        lbl.textColor = UIColor.white.withAlphaComponent(0.85)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
