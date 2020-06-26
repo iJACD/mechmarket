@@ -30,9 +30,11 @@ class MMSellTradePage: UICollectionViewCell {
     }()
     
     private lazy var listings = [MMListing]()
+    private lazy var afterId: String? = nil
     private lazy var dispatchGroup = DispatchGroup()
     private var selectedCountry: Country?
     weak var delegate: MMClassifiedsPageDelegate?
+    private var isLoading = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,6 +47,7 @@ class MMSellTradePage: UICollectionViewCell {
     }
     
     func reload(for origin: Country) {
+        isLoading = true
         dispatchGroup.enter()
         refreshControl.beginRefreshing()
         selectedCountry = origin
@@ -52,7 +55,8 @@ class MMSellTradePage: UICollectionViewCell {
         MMService.shared.loadFeed(for: origin, and: .sellingOrTrading) { res in
             switch res {
             case .success(let data):
-                data.forEach {
+                self.afterId = data.after
+                data.children.forEach {
                     listings.append($0.data)
                 }
             case .failure(let err):
@@ -66,6 +70,36 @@ class MMSellTradePage: UICollectionViewCell {
             self.listings = listings
             self.refreshControl.endRefreshing()
             self.collectionView.reloadData()
+            self.isLoading = false
+        }
+    }
+    
+    private func loadMore() {
+        isLoading = true
+        print("Going to start loading now...")
+        if let id = afterId,
+           let selectedCountry = selectedCountry {
+            // footer loading spinner start
+            dispatchGroup.enter()
+            MMService.shared.loadMoreFeed(after: id, for: selectedCountry, and: .sellingOrTrading) { res in
+                switch res {
+                case .success(let data):
+                    self.afterId = data.after
+                    data.children.forEach {
+                        self.listings.append($0.data)
+                    }
+                case .failure(let err):
+                    print("Failed to load more data:", err)
+                }
+                
+                self.dispatchGroup.leave()
+            }
+            
+            dispatchGroup.notify(queue: .main) {
+                // footer loading spinner stop
+                self.collectionView.reloadData()
+                self.isLoading = false
+            }
         }
     }
     
@@ -100,6 +134,14 @@ extension MMSellTradePage: UICollectionViewDataSource, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         listings.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.item >= listings.count - listings.count/3 && !isLoading {
+            print(listings.count)
+            print(listings.count - listings.count/3)
+            loadMore()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

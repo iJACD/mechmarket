@@ -54,7 +54,7 @@ class MMSoldPage: UICollectionViewCell {
         MMService.shared.loadFeed(for: origin, and: .soldOrPurchased) { res in
             switch res {
             case .success(let data):
-                data.forEach {
+                data.children.forEach {
                     listings.append($0.data)
                 }
             case .failure(let err):
@@ -112,6 +112,12 @@ extension MMSoldPage: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == listings.count - listings.count/3 {
+            print("Going to start loading now...")
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

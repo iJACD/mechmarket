@@ -112,6 +112,24 @@ extension MMListingDetailsViewController: UICollectionViewDelegateFlowLayout {
         return UICollectionViewCell()
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.item {
+        case 2:
+            return
+            // Provide a pop up saying feature not yet availble
+        case 3:
+            if let urlStr = listingDetails?.url,
+                let url = URL(string: urlStr) {
+                gotToUrl(url)
+            }
+        default:
+            return
+        }
+    }
+    
+    func gotToUrl(_ url: URL) {
+        UIApplication.shared.open(url)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat = 24

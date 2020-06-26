@@ -15,8 +15,11 @@ struct MMService {
     static let shared = MMService()
     
     /// Loads feed for specified origin, and flair from mechmarket subreddit. Ordering by new.
-    func loadFeed(for origin: Country, and flair: MMFlair, completion: @escaping (Result<[MMListingData], Error>) -> ()) {
-        let urlString = "\(baseURL)/\(subreddit)/search.json?q=\(origin.queryString)\(flair.queryString)&restrict_sr=on&sort=new&limit=30"
+    func loadFeed(for origin: Country, and flair: MMFlair, completion: @escaping (Result<MMEmbededData, Error>) -> ()) {
+        let sort = "new"
+        let timeFrame = "month"
+        let limit = 30
+        let urlString = "\(baseURL)/\(subreddit)/search.json?q=\(origin.queryString)\(flair.queryString)&restrict_sr=on&sort=\(sort)&limit=\(limit)&t=\(timeFrame)"
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, resp, err in
@@ -28,15 +31,33 @@ struct MMService {
             do {
                 let response = try JSONDecoder().decode(DataPackage<MMEmbededData>.self, from: data ?? Data())
                 print("⚪️ Request URL: \(urlString)")
-                completion(.success(response.data.children))
+                completion(.success(response.data))
             } catch let jsonErr {
                 completion(.failure(jsonErr))
             }
         }.resume()
     }
     
-    func loadMoreFeed(after id: String, in dist: String, for origin: Country, and flair: MMFlair, completion: @escaping (Result<[MMListingData], Error>) -> ()) {
-        
+    func loadMoreFeed(after id: String, for origin: Country, and flair: MMFlair, completion: @escaping (Result<MMEmbededData, Error>) -> ()) {
+        let sort = "new"
+        let timeFrame = "month"
+        let limit = 30
+        let urlString = "\(baseURL)/\(subreddit)/search.json?q=\(origin.queryString)\(flair.queryString)&restrict_sr=on&sort=\(sort)&limit=\(limit)&after=\(id)&t=\(timeFrame)"
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { data, resp, err in
+            if let err = err {
+               completion(.failure(err))
+               return
+            }
+
+            do {
+               let response = try JSONDecoder().decode(DataPackage<MMEmbededData>.self, from: data ?? Data())
+               print("🔵 Load More Request URL: \(urlString)")
+               completion(.success(response.data))
+            } catch let jsonErr {
+               completion(.failure(jsonErr))
+            }
+        }.resume()
     }
     
     func getImgurDirectLink(from urlString: String, completion: @escaping (Result<String, Error>) -> ()) {
