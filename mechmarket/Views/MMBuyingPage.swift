@@ -31,9 +31,11 @@ class MMBuyingPage: UICollectionViewCell {
     }()
     
     private lazy var listings = [MMListing]()
+    private lazy var afterId: String? = nil
     private lazy var dispatchGroup = DispatchGroup()
     private var selectedCountry: Country?
     weak var delegate: MMClassifiedsPageDelegate?
+    private var isLoading = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,14 +48,15 @@ class MMBuyingPage: UICollectionViewCell {
     }
     
     func reload(for origin: Country) {
+        isLoading = true
         dispatchGroup.enter()
         refreshControl.beginRefreshing()
         selectedCountry = origin
-
         var listings = [MMListing]()
         MMService.shared.loadFeed(for: origin, and: .buying) { res in
             switch res {
             case .success(let data):
+                self.afterId = data.after
                 data.children.forEach {
                     listings.append($0.data)
                 }
@@ -68,6 +71,36 @@ class MMBuyingPage: UICollectionViewCell {
             self.listings = listings
             self.refreshControl.endRefreshing()
             self.tableView.reloadData()
+            self.isLoading = false
+        }
+    }
+    
+    private func loadMore() {
+        isLoading = true
+        print("Going to start loading now...")
+        if let id = afterId,
+           let selectedCountry = selectedCountry {
+            // footer loading spinner start
+            dispatchGroup.enter()
+            MMService.shared.loadMoreFeed(after: id, for: selectedCountry, and: .buying) { res in
+                switch res {
+                case .success(let data):
+                    self.afterId = data.after
+                    data.children.forEach {
+                        self.listings.append($0.data)
+                    }
+                case .failure(let err):
+                    print("Failed to load more data:", err)
+                }
+                
+                self.dispatchGroup.leave()
+            }
+            
+            dispatchGroup.notify(queue: .main) {
+                // footer loading spinner stop
+                self.tableView.reloadData()
+                self.isLoading = false
+            }
         }
     }
     
@@ -115,8 +148,8 @@ extension MMBuyingPage: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == listings.count - listings.count/3 {
-            print("Going to start loading now...")
+        if indexPath.section >= listings.count - listings.count/3 && !isLoading {
+            loadMore()
         }
     }
     
