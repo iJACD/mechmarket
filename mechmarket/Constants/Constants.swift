@@ -16,8 +16,12 @@ public struct MM {
     
     struct Images {
         static let keyBoardImage = UIImage(named: "keyboardImage")
-        static let optionsButton = UIImage(systemName: "ellipsis", withConfiguration: UIImage.SymbolConfiguration(weight: .black))
-        static let closeButton = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(weight: .black))
+        static let optionsButton = UIImage(systemName: "ellipsis",
+                                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 32, weight: .semibold, scale: .medium))
+        static let optionsButtonCircle = UIImage(systemName: "ellipsis.circle.fill",
+                                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 32, weight: .semibold, scale: .medium))
+        static let closeButtonCircle = UIImage(systemName: "xmark.circle.fill",
+                                         withConfiguration: UIImage.SymbolConfiguration(pointSize: 32, weight: .semibold, scale: .medium))
     }
     
     struct FontNamed {

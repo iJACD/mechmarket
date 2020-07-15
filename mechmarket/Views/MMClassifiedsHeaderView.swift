@@ -40,7 +40,7 @@ final class MMClassifiedsHeaderView: UIView {
             mmTitleLabel.leadingAnchor.constraint(equalTo: mmRoundImageButton.trailingAnchor, constant: 10),
             
             mmOptionsButton.centerYAnchor.constraint(equalTo: v.centerYAnchor),
-            mmOptionsButton.trailingAnchor.constraint(equalTo: v.trailingAnchor, constant: -30)
+            mmOptionsButton.trailingAnchor.constraint(equalTo: v.trailingAnchor, constant: -40)
         ])
         return v
     }()

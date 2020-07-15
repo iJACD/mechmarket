@@ -17,24 +17,6 @@ final class MMListingDetailsHeaderView: UICollectionReusableView {
         return imgV
     }()
     
-    private lazy var mmOptionsButton: UIButton = {
-        let btn = UIButton(type: .custom)
-        btn.setImage(MM.Images.optionsButton, for: .normal)
-        btn.tintColor = .label
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.addTarget(self, action: #selector(didTapOptions), for: .touchUpInside)
-        return btn
-    }()
-    
-    private lazy var mmCloseButton: UIButton = {
-        let btn = UIButton(type: .custom)
-        btn.setImage(MM.Images.closeButton, for: .normal)
-        btn.tintColor = .label
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
-        return btn
-    }()
-    
     private lazy var userNameLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont(name: MM.FontNamed.HelveticaBold, size: 18)
@@ -42,14 +24,7 @@ final class MMListingDetailsHeaderView: UICollectionReusableView {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
-    
-    private lazy var tagLabel: MMFlairTagLabel = {
-        let tag = MMFlairTagLabel(frame: .zero)
-        return tag
-    }()
-    
-    weak var delegate: MMDetailsPageDelegate?
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -64,18 +39,7 @@ final class MMListingDetailsHeaderView: UICollectionReusableView {
         if let listing = listing {
             userNameLabel.text = "u/\(listing.author)"
             imageView.loadImage(urlString: listing.imageUrlString)
-            if let flair = listing.getFlair {
-                tagLabel.configure(with: flair)
-            }
         }
-    }
-    
-    @objc func didTapClose() {
-        delegate?.didTapClose()
-    }
-    
-    @objc func didTapOptions() {
-        
     }
     
     private func setup() {
@@ -88,20 +52,8 @@ final class MMListingDetailsHeaderView: UICollectionReusableView {
     }
     
     private func setupElements() {
-        addSubview(mmCloseButton)
-        addSubview(tagLabel)
-        addSubview(mmOptionsButton)
         addSubview(userNameLabel)
         NSLayoutConstraint.activate([
-            mmCloseButton.topAnchor.constraint(equalTo: topAnchor, constant: 40),
-            mmCloseButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            
-            mmOptionsButton.topAnchor.constraint(equalTo: topAnchor, constant: 40),
-            mmOptionsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            
-            tagLabel.topAnchor.constraint(equalTo: topAnchor, constant: 40),
-            tagLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
             userNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             userNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
@@ -110,7 +62,7 @@ final class MMListingDetailsHeaderView: UICollectionReusableView {
     private func setupGradientLayer() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradientLayer.locations = [0.65, 1]
+        gradientLayer.locations = [0.75, 1]
         
         let gradientContainerView = UIView()
         gradientContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -125,8 +77,4 @@ final class MMListingDetailsHeaderView: UICollectionReusableView {
         gradientLayer.frame = self.bounds
         gradientLayer.frame.origin.y -= bounds.height
     }
-}
-
-protocol MMDetailsPageDelegate: class {
-    func didTapClose()
 }

@@ -11,13 +11,44 @@ import UIKit
 final class MMListingDetailsViewController: UICollectionViewController {
     private var listingDetails: MMListing?
     let padding: CGFloat = 16
+    private lazy var gradientContainer: UIView = {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
+    
+    private lazy var mmOptionsButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setImage(MM.Images.optionsButtonCircle, for: .normal)
+        btn.tintColor = .white
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(didTapOptions), for: .touchUpInside)
+        return btn
+    }()
+
+    private lazy var mmCloseButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setImage(MM.Images.closeButtonCircle, for: .normal)
+        btn.tintColor = .white
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
+        return btn
+    }()
+
+    private lazy var tagLabel: MMFlairTagLabel = {
+        let tag = MMFlairTagLabel(frame: .zero)
+        return tag
+    }()
+        
     
     static func configure(with listing: MMListing) -> MMListingDetailsViewController {
         let layout = GumGumHeaderLayout()
-//        let width = UIScreen.main.bounds.size.width
-//        layout.estimatedItemSize = CGSize(width: width, height: 10)
         let vc = MMListingDetailsViewController(collectionViewLayout: layout)
         vc.listingDetails = listing
+        
+        if let flair = listing.getFlair {
+            vc.tagLabel.configure(with: flair)
+        }
         
         return vc
     }
@@ -25,6 +56,14 @@ final class MMListingDetailsViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    @objc func didTapClose() {
+        dismiss(animated: true)
+    }
+    
+    @objc func didTapOptions() {
+        
     }
     
     
@@ -43,6 +82,32 @@ final class MMListingDetailsViewController: UICollectionViewController {
         collectionView.register(MMListingDetailsHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: MMListingDetailsHeaderView.reuseIdentifier)
+        view.addSubview(gradientContainer)
+        view.addSubview(mmCloseButton)
+        view.addSubview(tagLabel)
+        view.addSubview(mmOptionsButton)
+        
+        NSLayoutConstraint.activate([
+            gradientContainer.topAnchor.constraint(equalTo: view.topAnchor),
+            gradientContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gradientContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            mmCloseButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+            mmCloseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+                   
+            mmOptionsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+            mmOptionsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+                   
+            tagLabel.centerYAnchor.constraint(equalTo: mmCloseButton.centerYAnchor),
+            tagLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradientLayer.locations = [0, 0.15]
+        gradientContainer.layer.addSublayer(gradientLayer)
+        gradientLayer.frame = view.bounds
+        gradientLayer.frame.origin.y = 0
     }
     
     private func setupLayout() {
@@ -58,7 +123,6 @@ extension MMListingDetailsViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MMListingDetailsHeaderView.reuseIdentifier, for: indexPath) as? MMListingDetailsHeaderView {
             header.configure(with: listingDetails)
-            header.delegate = self
             return header
         }
         
@@ -171,11 +235,5 @@ extension MMListingDetailsViewController: UICollectionViewDelegateFlowLayout {
         label.sizeToFit()
 
         return label.frame.height
-    }
-}
-
-extension MMListingDetailsViewController: MMDetailsPageDelegate {
-    func didTapClose() {
-        dismiss(animated: true)
     }
 }
