@@ -10,7 +10,7 @@ Once you have these two string values you will create a file named "Secrets.swif
 and add it to the directory mechmarket/Constants/.
 
 The Secrets object is an enum that should be structured as follows:
-`
+```
 import Foundation
 enum Secrets {
   case CLIENT_ID
@@ -21,7 +21,7 @@ enum Secrets {
     case .CLIENT_SECRET: return "<-Your Client Secret Here->"
     }
   }
-}`
+}```
 
 *Note: Be sure to prefix your client id with "Client-ID" followed by a space.
 
