@@ -21,7 +21,8 @@ enum Secrets {
     case .CLIENT_SECRET: return "<-Your Client Secret Here->"
     }
   }
-}```
+}
+```
 
 *Note: Be sure to prefix your client id with "Client-ID" followed by a space.
 
